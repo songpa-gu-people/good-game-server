@@ -1,0 +1,23 @@
+spring:
+  config:
+    import:
+      - rdb.yml
+  profiles:
+    active: local
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod

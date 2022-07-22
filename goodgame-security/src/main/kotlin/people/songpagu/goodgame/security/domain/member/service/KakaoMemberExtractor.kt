@@ -12,8 +12,9 @@ class KakaoMemberExtractor : Oauth2MemberExtractor {
     }
 
     override fun extract(attributes: Map<String, Any>): Oauth2ValidatedMember {
+        val id = attributes["id"] as Long
         val kakaoAccount = attributes["kakao_account"] as Map<*, *>
 
-        return Oauth2ValidatedMember(kakaoAccount["email"] as String)
+        return Oauth2ValidatedMember.Kakao(id.toString(), kakaoAccount["email"] as String)
     }
 }

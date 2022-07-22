@@ -1,23 +1,48 @@
 spring:
   config:
     import:
-      - rdb.yml
+      - persistance-jpa.yml
+      - security.yml
   profiles:
-    active: local
+    active: test-local
 ---
 spring:
   config:
     activate:
       on-profile: test
 
----
-spring:
-  config:
-    activate:
-      on-profile: local
+authentication:
+  enabled: false
+
 
 ---
 spring:
   config:
     activate:
+      on-profile: test-local
+
+authentication:
+  enabled: true
+  url-patterns:
+    - "/api/v1/**"
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-local
+
+authentication:
+  enabled: true
+  url-patterns:
+    - "/api/v1/**"
+---
+spring:
+  config:
+    activate:
       on-profile: prod
+
+authentication:
+  enabled: true
+  url-patterns:
+    - "/api/v1/**"

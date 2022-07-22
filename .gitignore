@@ -121,3 +121,8 @@ hs_err_pid*
 ## Docker MariaDB
 **/docker/mariadb/data/
 **/docker/mariadb/log/
+
+##secret
+persistance-jpa.yml
+security.yml
+jwt.yml

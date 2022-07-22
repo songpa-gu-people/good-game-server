@@ -25,6 +25,7 @@ dependencies {
     implementation(projects.goodgameApplication)
     implementation(projects.goodgamePersistance.rdb)
     implementation(projects.infrastructure.log)
+    implementation(projects.infrastructure.jwt)
 
     implementation(Dependencies.JWT.JWT_API)
     runtimeOnly(Dependencies.JWT.JWT_IMPL)

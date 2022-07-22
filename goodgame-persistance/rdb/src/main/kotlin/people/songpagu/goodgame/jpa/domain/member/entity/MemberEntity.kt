@@ -8,6 +8,7 @@ import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.Index
 import javax.persistence.Table
 import javax.persistence.UniqueConstraint
 
@@ -15,8 +16,12 @@ import javax.persistence.UniqueConstraint
 @Entity
 @Table(
     name = "member",
+    indexes = [
+        Index(name = "idx_member_1", columnList = "email")
+    ],
     uniqueConstraints = [
-        UniqueConstraint(name = "uk_member", columnNames = ["member_number"])
+        UniqueConstraint(name = "uk_member_1", columnNames = ["member_number"]),
+        UniqueConstraint(name = "uk_member_2", columnNames = ["auth_id"]),
     ],
 )
 class MemberEntity(
@@ -28,8 +33,11 @@ class MemberEntity(
     @Column(name = "member_number", nullable = false, columnDefinition = "VARCHAR(32) COMMENT '회원번호'")
     val memberNumber: String,
 
-    @Column(name = "member_details", nullable = false, columnDefinition = "VARCHAR(2048) COMMENT '회원상세'")
-    val memberDetails: String,
+    @Column(name = "auth_id", nullable = false, columnDefinition = "VARCHAR(128) COMMENT '회원인증 아이디'")
+    val authId: String,
+
+    @Column(name = "email", nullable = false, columnDefinition = "VARCHAR(64) COMMENT '이메일'")
+    val email: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "login_type", nullable = false, columnDefinition = "VARCHAR(20) COMMENT '로그인 타입'")

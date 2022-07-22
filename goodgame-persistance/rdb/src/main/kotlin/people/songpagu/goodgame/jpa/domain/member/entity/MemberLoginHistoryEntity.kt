@@ -8,12 +8,17 @@ import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.Index
+import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.Table
 
 @Entity
 @Table(
     name = "member_login_history",
+    indexes = [
+        Index(name = "idx_member_login_history_1", columnList = "member_id")
+    ],
 )
 class MemberLoginHistoryEntity(
     @Id
@@ -22,5 +27,6 @@ class MemberLoginHistoryEntity(
     val id: Long? = null,
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.PERSIST])
+    @JoinColumn(name = "member_id", columnDefinition = "BIGINT COMMENT '회원 아이디'")
     val memberEntity: MemberEntity,
 ) : BaseEntity()

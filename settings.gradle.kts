@@ -12,9 +12,8 @@ include(
     "goodgame-api",
     "goodgame-domain",
     "goodgame-application",
-    "goodgame-persistance",
     "goodgame-persistance:rdb",
-    "infrastructure",
-    "infrastructure:log"
+    "goodgame-security",
+    "infrastructure:log",
+    "infrastructure:jwt",
 )
-include("goodgame-security")

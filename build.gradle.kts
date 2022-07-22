@@ -71,7 +71,8 @@ val springProjects = listOf(
     projects.goodgameApi,
     projects.goodgameSecurity,
     projects.goodgamePersistance.rdb,
-    projects.infrastructure.log
+    projects.infrastructure.log,
+    projects.infrastructure.jwt
 ).map { it.dependencyProject }
 
 configure(springProjects) {

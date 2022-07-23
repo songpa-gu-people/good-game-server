@@ -63,7 +63,7 @@ object Dependencies {
     object Database {
         const val H2 = "com.h2database:h2"
         const val MARIADB = "org.mariadb.jdbc:mariadb-java-client"
-        const val FLYWAY = "org.flywaydb:flyway-core"
+        const val FLYWAY = "org.flywaydb:flyway-mysql"
     }
 
     object Querydsl {

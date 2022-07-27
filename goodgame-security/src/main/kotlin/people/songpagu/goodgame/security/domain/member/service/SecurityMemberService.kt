@@ -2,41 +2,29 @@ package people.songpagu.goodgame.security.domain.member.service
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import people.songpagu.goodgame.application.member.auth.join.incoming.MemberJoinUseCase
 import people.songpagu.goodgame.domain.member.model.LoginMember
-import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
-import people.songpagu.goodgame.jpa.domain.member.entity.MemberLoginHistoryEntity
-import people.songpagu.goodgame.jpa.domain.member.repository.MemberJpaRepository
-import people.songpagu.goodgame.jpa.domain.member.repository.MemberLoginHistoryJpaRepository
+import people.songpagu.goodgame.security.domain.member.exception.GoodGameLoginException
 import people.songpagu.goodgame.security.domain.member.service.Oauth2MemberExtractor.Oauth2ValidatedMember
-import java.time.LocalDateTime
-import java.util.UUID
+import people.songpagu.infrastructure.log.Slf4j
+import people.songpagu.infrastructure.log.Slf4j.Companion.log
 
+@Slf4j
 @Service
 class SecurityMemberService(
-    private val memberRepository: MemberJpaRepository,
-    private val memberLoginHistoryRepository: MemberLoginHistoryJpaRepository,
+    private val memberJoinUseCase: MemberJoinUseCase,
 ) {
     @Transactional
     fun signUpOrIn(oauth2Member: Oauth2ValidatedMember): LoginMember {
-        val memberEntity: MemberEntity = memberRepository.findByAuthId(oauth2Member.authId) ?: signUp(oauth2Member)
-        val history = MemberLoginHistoryEntity(memberEntity = memberEntity)
-        memberLoginHistoryRepository.save(history)
+        val command: MemberJoinUseCase.MemberJoinCommand = oauth2Member.toMemberJoinCommand()
 
-        return LoginMember(
-            memberNumber = memberEntity.memberNumber,
-            expireDatetime = LocalDateTime.now().plusDays(LoginMember.EXPIRE_PERIOD),
-            createdDateTime = LocalDateTime.now()
-        )
-    }
+        val answer: MemberJoinUseCase.MemberJoinAnswer = memberJoinUseCase.join(command)
+        log.info("[로그인] : {}", answer)
 
-    private fun signUp(oauth2Member: Oauth2ValidatedMember): MemberEntity {
-        return memberRepository.save(
-            MemberEntity(
-                memberNumber = UUID.randomUUID().toString().replace("-", ""),
-                authId = oauth2Member.authId,
-                loginType = oauth2Member.type,
-                email = oauth2Member.email,
-            )
-        )
+        if (answer is MemberJoinUseCase.MemberJoinAnswer.INCOMPLETE) {
+            throw GoodGameLoginException(exposureMessage = answer.message)
+        }
+
+        return answer.loginMember
     }
 }

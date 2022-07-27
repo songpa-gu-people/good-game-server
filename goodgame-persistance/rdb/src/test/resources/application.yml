@@ -1,3 +1,3 @@
 spring:
   config:
-    import: classpath:persistance-jpa.yml
+    import: classpath:persistence-jpa.yml

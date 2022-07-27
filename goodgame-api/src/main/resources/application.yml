@@ -1,7 +1,7 @@
 spring:
   config:
     import:
-      - persistance-jpa.yml
+      - persistence-jpa.yml
       - security.yml
   profiles:
     active: test-local

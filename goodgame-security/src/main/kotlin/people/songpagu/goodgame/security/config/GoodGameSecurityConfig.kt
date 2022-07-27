@@ -24,12 +24,12 @@ import javax.annotation.PostConstruct
     ]
 )
 @Configuration
+@ComponentScan("people.songpagu.goodgame.security.domain")
 class GoodGameSecurityConfig {
 
     @Slf4j
     @Configuration
     @EnableWebSecurity
-    @ComponentScan("people.songpagu.goodgame.security.domain")
     @ConditionalOnProperty(value = ["goodgame.security.mode"], havingValue = "web-security")
     class SecurityMajorConfig {
 
@@ -55,7 +55,8 @@ class GoodGameSecurityConfig {
                 .exceptionHandling()
                 .authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
-                .oauth2Login().authorizationEndpoint()
+                .oauth2Login()
+                .authorizationEndpoint()
                 .authorizationRequestRepository(authorizationRequestRepository)
                 .and()
                 .successHandler(oAuth2SuccessHandler)

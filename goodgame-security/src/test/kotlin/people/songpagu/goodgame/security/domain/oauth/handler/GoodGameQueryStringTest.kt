@@ -3,6 +3,7 @@ package people.songpagu.goodgame.security.domain.oauth.handler
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import people.songpagu.goodgame.security.domain.oauth.handler.model.GoodGameQueryString
 
 internal class GoodGameQueryStringTest {
 

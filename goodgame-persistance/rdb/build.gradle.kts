@@ -6,6 +6,11 @@ plugins {
     kotlin(Plugins.Modules.SPRING)
     kotlin(Plugins.Modules.JPA)
     kotlin(Plugins.Modules.KAPT)
+
+    // TestFixture
+    `java-library`
+    `java-test-fixtures`
+    `maven-publish`
 }
 
 
@@ -24,6 +29,7 @@ kotlin.sourceSets.main {
 dependencies {
     implementation(projects.goodgameDomain)
     implementation(projects.goodgameApplication)
+    implementation(projects.infrastructure.log)
 
     implementation("${Dependencies.Database.FLYWAY}:${Versions.FLY_WAY}")
     api(Dependencies.Spring.Boot.DATA_JPA)
@@ -34,4 +40,6 @@ dependencies {
     api(Dependencies.Querydsl.JPA)
 
     kapt(Dependencies.Querydsl.APT)
+
+    testFixturesImplementation(projects.infrastructure.log)
 }

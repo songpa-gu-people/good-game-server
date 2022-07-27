@@ -1,33 +1,35 @@
 package people.songpagu.goodgame.api.domain.response
 
+import people.songpagu.goodgame.domain.exception.GoodGameCode
+
 sealed class ApiResponse<T>(
-    val code: GoodGameResponseCode,
+    val code: GoodGameCode,
     val data: T? = null,
     val message: String,
 ) {
-    class Ok<T>(data: T? = null, message: String) : ApiResponse<T>(code = GoodGameResponseCode.OK, data = data, message = message) {
+    class Ok<T>(data: T? = null, message: String) : ApiResponse<T>(code = GoodGameCode.OK, data = data, message = message) {
         constructor(data: T? = null) : this(
             data = data,
-            message = GoodGameResponseCode.OK.defaultMessage
+            message = GoodGameCode.OK.exposureMessage
         )
 
-        constructor() : this(message = GoodGameResponseCode.OK.defaultMessage)
+        constructor() : this(message = GoodGameCode.OK.exposureMessage)
     }
 
-    class Fail<T>(code: GoodGameResponseCode, data: T?, message: String) : ApiResponse<T>(code = code, data = data, message = message) {
+    class Fail<T>(code: GoodGameCode, data: T?, message: String) : ApiResponse<T>(code = code, data = data, message = message) {
         constructor() : this(
-            code = GoodGameResponseCode.INTERNAL_SERVER_ERROR,
+            code = GoodGameCode.INTERNAL_SERVER_ERROR,
             data = null,
-            message = GoodGameResponseCode.INTERNAL_SERVER_ERROR.defaultMessage
+            message = GoodGameCode.INTERNAL_SERVER_ERROR.exposureMessage
         )
 
-        constructor(code: GoodGameResponseCode) : this(
+        constructor(code: GoodGameCode) : this(
             code = code,
             data = null,
-            message = code.defaultMessage
+            message = code.exposureMessage
         )
 
-        constructor(code: GoodGameResponseCode, message: String) : this(
+        constructor(code: GoodGameCode, message: String) : this(
             code = code,
             data = null,
             message = message

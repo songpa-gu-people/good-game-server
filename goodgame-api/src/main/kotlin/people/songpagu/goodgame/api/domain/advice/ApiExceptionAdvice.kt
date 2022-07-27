@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import people.songpagu.goodgame.api.domain.response.ApiResponse
+import people.songpagu.goodgame.domain.exception.GoodGameException
 import people.songpagu.infrastructure.log.Slf4j
 import people.songpagu.infrastructure.log.Slf4j.Companion.log
 
@@ -17,5 +18,12 @@ class ApiExceptionAdvice {
     fun handleException(e: Exception): ApiResponse<Nothing> {
         log.error("API Unknown Error: {}", e.toString(), e)
         return ApiResponse.Fail()
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(GoodGameException::class)
+    fun handleGoodGameException(e: GoodGameException): ApiResponse<Nothing> {
+        log.error("API GoodGameException Error: {}", e.internalMessage?:e.toString(), e)
+        return ApiResponse.Fail(e.code)
     }
 }

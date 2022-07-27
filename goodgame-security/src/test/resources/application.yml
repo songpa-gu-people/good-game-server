@@ -1,0 +1,7 @@
+spring:
+  config:
+    import:
+      - persistence-jpa.yml
+      - security.yml
+  profiles:
+    active: test

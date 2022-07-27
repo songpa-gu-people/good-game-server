@@ -124,5 +124,6 @@ hs_err_pid*
 
 ##secret
 persistance-jpa.yml
+persistence-jpa.yml
 security.yml
 jwt.yml

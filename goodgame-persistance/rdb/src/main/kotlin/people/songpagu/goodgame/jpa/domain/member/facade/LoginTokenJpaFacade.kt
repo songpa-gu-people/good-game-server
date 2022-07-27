@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.jpa.domain.member.auth.login.facade
+package people.songpagu.goodgame.jpa.domain.member.facade
 
 import org.springframework.stereotype.Repository
 import people.songpagu.goodgame.application.member.auth.login.incoming.LoginTokenCreateUseCase.LoginTokenCreateCommand

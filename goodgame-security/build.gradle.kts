@@ -34,4 +34,6 @@ dependencies {
     implementation(Dependencies.Spring.Boot.WEB)
     implementation(Dependencies.Spring.Boot.OAUTH2)
     testImplementation(Dependencies.Spring.Boot.SECURITY_TEST)
+
+    testImplementation(testFixtures(projects.goodgamePersistance.rdb))
 }

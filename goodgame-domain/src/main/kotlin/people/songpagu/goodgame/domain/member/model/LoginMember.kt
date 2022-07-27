@@ -4,8 +4,8 @@ import java.time.LocalDateTime
 
 data class LoginMember(
     val memberNumber: String,
-    var expireDatetime: LocalDateTime,
-    var createdDateTime: LocalDateTime,
+    val createdDateTime: LocalDateTime = LocalDateTime.now(),
+    val expireDatetime: LocalDateTime = createdDateTime.plusDays(EXPIRE_PERIOD),
 ) {
     companion object {
         const val KEY: String = "goodGameLoginMember"

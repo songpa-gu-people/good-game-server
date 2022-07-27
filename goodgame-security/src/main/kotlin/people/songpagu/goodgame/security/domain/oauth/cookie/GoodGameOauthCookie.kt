@@ -10,6 +10,7 @@ class GoodGameOauthCookie(
         val cookie = Cookie(REFRESH_TOKEN_NAME, token)
         cookie.path = "/"
         cookie.isHttpOnly = true
+        cookie.secure = true
         cookie.maxAge = 5
         response.addCookie(cookie)
         return response
@@ -19,6 +20,7 @@ class GoodGameOauthCookie(
         val cookie = Cookie(REFRESH_TOKEN_NAME, null)
         cookie.path = "/"
         cookie.isHttpOnly = true
+        cookie.secure = true
         cookie.maxAge = 0
         response.addCookie(cookie)
         return response

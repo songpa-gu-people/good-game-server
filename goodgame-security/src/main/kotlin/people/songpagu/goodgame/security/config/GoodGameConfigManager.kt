@@ -3,6 +3,11 @@ package people.songpagu.goodgame.security.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
+import people.songpagu.goodgame.application.member.auth.join.incoming.MemberJoinUseCase
+import people.songpagu.goodgame.application.member.auth.join.outgoing.LoginHistoryRecordPort
+import people.songpagu.goodgame.application.member.auth.join.outgoing.MemberCreatePort
+import people.songpagu.goodgame.application.member.auth.join.outgoing.MemberFindPort
+import people.songpagu.goodgame.application.member.auth.join.service.MemberJoinService
 import people.songpagu.goodgame.application.member.auth.login.incoming.LoginTokenCreateUseCase
 import people.songpagu.goodgame.application.member.auth.login.incoming.LoginTokenRemoveUseCase
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginTokenCreatePort
@@ -40,5 +45,18 @@ class GoodGameConfigManager {
         loginTokenFindPort: LoginTokenFindPort,
     ): LoginTokenRemoveUseCase {
         return LoginTokenRemoveService(loginTokenFindPort, loginTokenRemovePort)
+    }
+
+    @Bean
+    fun memberJoinUseCase(
+        memberFindPort: MemberFindPort,
+        memberCreatePort: MemberCreatePort,
+        loginHistoryRecordPort: LoginHistoryRecordPort,
+    ): MemberJoinUseCase {
+        return MemberJoinService(
+            memberFindPort = memberFindPort,
+            memberCreatePort = memberCreatePort,
+            loginHistoryRecordPort = loginHistoryRecordPort,
+        )
     }
 }

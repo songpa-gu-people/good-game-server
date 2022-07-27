@@ -14,7 +14,7 @@ class AuthenticationInterceptor(
 ) : HandlerInterceptor {
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        val authorization: String = request.getHeader(HttpHeaders.AUTHORIZATION)
+        val authorization: String = request.getHeader(HttpHeaders.AUTHORIZATION) // Authorization Bearer asdfasdf-asdf-asdf
 
         val accessToken: String? = authorization.split("Bearer ").firstOrNull()
         requireNotNull(accessToken) { "인증 토큰이 없습니다." }

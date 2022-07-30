@@ -21,6 +21,7 @@ import javax.annotation.PostConstruct
 @Import(
     value = [
         GoodGameConfigManager::class,
+        GoodGameCorsConfig::class
     ]
 )
 @Configuration
@@ -49,6 +50,7 @@ class GoodGameSecurityConfig {
                 .frameOptions().disable()
                 .and()
                 .csrf().disable()
+                .cors().and()
                 .authorizeRequests()
                 .anyRequest().permitAll()
                 .and()

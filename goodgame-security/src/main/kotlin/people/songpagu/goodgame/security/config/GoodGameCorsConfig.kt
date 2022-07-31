@@ -2,14 +2,21 @@ package people.songpagu.goodgame.security.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
+@Profile(
+    value = [
+        "test-local",
+        "docker-local",
+    ]
+)
 @Configuration
 class GoodGameCorsConfig {
     @Bean
-    fun corsConfigurationSource():CorsConfigurationSource {
+    fun corsConfigurationSource(): CorsConfigurationSource {
         val corsConfiguration = CorsConfiguration()
 
         corsConfiguration.addAllowedOrigin("http://localhost:3000")

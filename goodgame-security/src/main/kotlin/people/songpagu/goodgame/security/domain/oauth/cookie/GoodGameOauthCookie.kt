@@ -11,7 +11,6 @@ class GoodGameOauthCookie(
         cookie.path = "/"
         cookie.isHttpOnly = true
         cookie.secure = true
-        cookie.maxAge = 5
         response.addCookie(cookie)
         return response
     }
@@ -27,6 +26,6 @@ class GoodGameOauthCookie(
     }
 
     companion object {
-        const val REFRESH_TOKEN_NAME: String = "goodGameRefreshToken"
+        const val REFRESH_TOKEN_NAME: String = "Gg_R"
     }
 }

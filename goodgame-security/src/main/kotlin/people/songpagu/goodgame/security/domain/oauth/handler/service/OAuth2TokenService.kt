@@ -20,11 +20,11 @@ class OAuth2TokenService(
     }
 
     fun generateLoginToken(loginMember: LoginMember): String {
-        val refreshToken = UUID.randomUUID().toString()
+        val subject = UUID.randomUUID().toString()
 
         val command = LoginTokenCreateCommand(
             loginTokenType = LoginTokenType.JWT,
-            refreshToken = refreshToken,
+            subject = subject,
             memberNumber = loginMember.memberNumber,
             expireDateTime = loginMember.expireDatetime,
         )

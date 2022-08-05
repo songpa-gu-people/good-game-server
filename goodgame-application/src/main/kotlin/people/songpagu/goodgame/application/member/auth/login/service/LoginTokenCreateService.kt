@@ -10,6 +10,6 @@ class LoginTokenCreateService(
     override fun create(command: LoginTokenCreateCommand): String {
         loginTokenCreatePort.create(command)
 
-        return command.refreshToken
+        return command.subject
     }
 }

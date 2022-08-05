@@ -6,4 +6,5 @@ import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
 
 interface MemberJpaRepository : JpaRepository<MemberEntity, Long> {
     fun findByAuthIdAndLoginType(authId: String, loginType: LoginType): MemberEntity?
+    fun findByMemberNumber(memberNumber: String): MemberEntity?
 }

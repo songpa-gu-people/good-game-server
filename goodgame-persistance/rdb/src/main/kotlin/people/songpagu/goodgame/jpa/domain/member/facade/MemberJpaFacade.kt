@@ -48,6 +48,13 @@ class MemberJpaFacade(
         }
     }
 
+    override fun findByMemberNum(memberNumber: String): LoginMember? {
+        val memberEntity: MemberEntity? = memberJpaRepository.findByMemberNumber(memberNumber)
+        return memberEntity?.let {
+            LoginMember(memberEntity.memberNumber)
+        }
+    }
+
     override fun record(command: LoginHistoryRecordPort.LoginHistoryRecordCommand) {
         memberLoginHistoryJpaRepository.save(
             MemberLoginHistoryEntity(memberNumber = command.memberNumber, status = command.type)

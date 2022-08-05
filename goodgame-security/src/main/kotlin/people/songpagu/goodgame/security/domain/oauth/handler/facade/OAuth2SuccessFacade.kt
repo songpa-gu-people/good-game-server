@@ -17,11 +17,11 @@ class OAuth2SuccessFacade(
         oAuth2TokenService.deleteLoginToken(loginMember)
 
         //신규 refreshToken 발급
-        val refreshToken: String = oAuth2TokenService.generateLoginToken(loginMember)
+        val refreshTokenSubject: String = oAuth2TokenService.generateLoginToken(loginMember)
 
         //refreshJwt 발급
         val issueCommand = TokenIssueCommand(
-            payload = refreshToken,
+            payload = refreshTokenSubject,
             issueDateTime = loginMember.createdDateTime,
             expireDateTime = loginMember.expireDatetime,
         )

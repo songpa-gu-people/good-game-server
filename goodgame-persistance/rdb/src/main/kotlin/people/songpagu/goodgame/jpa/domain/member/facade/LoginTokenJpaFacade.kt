@@ -2,6 +2,7 @@ package people.songpagu.goodgame.jpa.domain.member.facade
 
 import org.springframework.stereotype.Repository
 import people.songpagu.goodgame.application.member.auth.login.incoming.LoginTokenCreateUseCase.LoginTokenCreateCommand
+import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginMemberNumberFindPort
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginTokenCreatePort
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginTokenFindPort
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginTokenFindPort.LoginTokenFindAnswer
@@ -12,7 +13,7 @@ import people.songpagu.goodgame.jpa.domain.member.repository.LoginTokenJpaReposi
 @Repository
 class LoginTokenJpaFacade(
     private val loginTokenJpaRepository: LoginTokenJpaRepository,
-) : LoginTokenFindPort, LoginTokenRemovePort, LoginTokenCreatePort {
+) : LoginTokenFindPort, LoginTokenRemovePort, LoginTokenCreatePort, LoginMemberNumberFindPort {
 
     override fun findAllBy(memberNumber: String): List<LoginTokenFindAnswer> {
         return loginTokenJpaRepository.findAllByMemberNumber(memberNumber)
@@ -20,7 +21,7 @@ class LoginTokenJpaFacade(
                 LoginTokenFindAnswer(
                     id = requireNotNull(it.id),
                     memberNumber = it.memberNumber,
-                    refreshToken = it.refreshToken,
+                    refreshToken = it.subject,
                 )
             }
     }
@@ -30,11 +31,16 @@ class LoginTokenJpaFacade(
     }
 
     override fun create(command: LoginTokenCreateCommand) {
-        LoginTokenEntity(
+        val loginTokenEntity = LoginTokenEntity(
             tokenType = command.loginTokenType,
-            refreshToken = command.refreshToken,
+            subject = command.subject,
             memberNumber = command.memberNumber,
             expireDateTime = command.expireDateTime,
         )
+        loginTokenJpaRepository.save(loginTokenEntity)
+    }
+
+    override fun findMemberNumber(subject: String): String {
+        return loginTokenJpaRepository.findBySubject(subject).memberNumber
     }
 }

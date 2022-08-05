@@ -14,7 +14,7 @@ interface TokenGenerateUseCase {
             fun accessToken(
                 payload: String,
                 issueDateTime: LocalDateTime = LocalDateTime.now(),
-                expireDateTime: LocalDateTime = issueDateTime.plusSeconds(3),
+                expireDateTime: LocalDateTime = issueDateTime.plusSeconds(10),
             ): TokenIssueCommand {
                 return TokenIssueCommand(
                     payload = payload,

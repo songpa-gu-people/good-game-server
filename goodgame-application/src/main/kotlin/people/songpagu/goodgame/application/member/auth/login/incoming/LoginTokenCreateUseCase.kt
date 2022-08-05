@@ -9,7 +9,7 @@ interface LoginTokenCreateUseCase {
     data class LoginTokenCreateCommand(
         val memberNumber: String,
         val loginTokenType: LoginTokenType,
-        val refreshToken: String,
+        val subject: String,
         val expireDateTime: LocalDateTime,
     )
 }

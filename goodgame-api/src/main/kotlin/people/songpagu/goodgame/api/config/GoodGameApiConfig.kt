@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
+import people.songpagu.goodgame.application.member.auth.login.incoming.LoginMemberNumberFindUseCase
+import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginMemberNumberFindPort
+import people.songpagu.goodgame.application.member.auth.login.service.LoginMemberNumberFindService
 import people.songpagu.goodgame.application.token.decode.incoming.TokenAuthenticateUseCase
 import people.songpagu.goodgame.application.token.decode.outgoing.TokenDecodePort
 import people.songpagu.goodgame.application.token.decode.service.TokenAuthenticateService
@@ -24,9 +27,14 @@ import people.songpagu.goodgame.security.config.GoodGameSecurityConfig
     ]
 )
 @Configuration
-class GoodGameApiConfig{
+class GoodGameApiConfig {
     @Bean
     fun tokenAuthenticateUseCase(tokenDecodePort: TokenDecodePort): TokenAuthenticateUseCase {
         return TokenAuthenticateService(tokenDecodePort)
+    }
+
+    @Bean
+    fun loginMemberNumberFindUseCase(port: LoginMemberNumberFindPort): LoginMemberNumberFindUseCase {
+        return LoginMemberNumberFindService(port)
     }
 }

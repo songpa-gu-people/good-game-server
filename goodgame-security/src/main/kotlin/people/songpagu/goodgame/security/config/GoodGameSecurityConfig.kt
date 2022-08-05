@@ -12,11 +12,16 @@ import org.springframework.security.oauth2.client.web.AuthorizationRequestReposi
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import people.songpagu.goodgame.application.token.decode.incoming.TokenAuthenticateUseCase
+import people.songpagu.goodgame.security.config.filter.JwtAuthenticationFilter
+import people.songpagu.goodgame.security.domain.member.service.UserDetailsServiceImpl
 import people.songpagu.goodgame.security.domain.member.service.WebSecurityUserService
 import people.songpagu.goodgame.security.domain.oauth.handler.OAuth2SuccessHandler
 import people.songpagu.infrastructure.log.Slf4j
 import people.songpagu.infrastructure.log.Slf4j.Companion.log
 import javax.annotation.PostConstruct
+import javax.servlet.Filter
 
 @Import(
     value = [
@@ -45,6 +50,8 @@ class GoodGameSecurityConfig {
             oAuth2SuccessHandler: OAuth2SuccessHandler,
             webSecurityUserService: WebSecurityUserService,
             authorizationRequestRepository: AuthorizationRequestRepository<OAuth2AuthorizationRequest>,
+            tokenAuthenticateUseCase: TokenAuthenticateUseCase,
+            userDetailsService: UserDetailsServiceImpl
         ): SecurityFilterChain {
             http.headers()
                 .frameOptions().disable()
@@ -56,17 +63,31 @@ class GoodGameSecurityConfig {
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+
                 .and()
                 .oauth2Login()
                 .authorizationEndpoint()
                 .authorizationRequestRepository(authorizationRequestRepository)
                 .and()
-                .successHandler(oAuth2SuccessHandler)
                 .userInfoEndpoint().userService(webSecurityUserService)
+
+                .and()
+                .successHandler(oAuth2SuccessHandler)
+                .and()
+                .addFilterBefore(
+                    jwtAuthenticationFilter(tokenAuthenticateUseCase, userDetailsService),
+                    UsernamePasswordAuthenticationFilter::class.java
+                )
 
             return http.build()
         }
 
+        fun jwtAuthenticationFilter(
+            tokenAuthenticateUseCase: TokenAuthenticateUseCase,
+            userDetailsService: UserDetailsServiceImpl
+        ): Filter? {
+            return JwtAuthenticationFilter(tokenAuthenticateUseCase, userDetailsService)
+        }
     }
 
     @Slf4j

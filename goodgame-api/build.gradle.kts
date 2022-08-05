@@ -19,6 +19,8 @@ dependencies {
 
     testImplementation(Dependencies.Spring.RestDocs.MOCK_MVC)
     testImplementation(Dependencies.Spring.RestDocs.ASCII_DOCTOR)
+
+    implementation(Dependencies.Spring.Boot.OAUTH2)
 }
 
 tasks {

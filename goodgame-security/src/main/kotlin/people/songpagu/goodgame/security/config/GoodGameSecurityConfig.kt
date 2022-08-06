@@ -73,6 +73,7 @@ class GoodGameSecurityConfig {
 
                 .and()
                 .successHandler(oAuth2SuccessHandler)
+                //todo failhandler
                 .and()
                 .addFilterBefore(
                     jwtAuthenticationFilter(tokenAuthenticateUseCase, userDetailsService),

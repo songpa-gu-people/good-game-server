@@ -1,0 +1,4 @@
+[submodule "secret"]
+	path = secret
+	url = https://github.com/songpa-gu-people/secret
+	branch = main

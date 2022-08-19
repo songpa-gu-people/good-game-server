@@ -2,6 +2,7 @@ package people.songpagu.goodgame.jpa.domain.matching.converter
 
 import people.songpagu.goodgame.domain.matching.option.District
 import javax.persistence.AttributeConverter
+import kotlin.streams.toList
 
 private const val DELIMITER = ","
 

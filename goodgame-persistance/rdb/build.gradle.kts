@@ -22,9 +22,21 @@ tasks.getByName<BootJar>("bootJar") {
     enabled = false
 }
 
+
+val copyYml = tasks.register<Copy>("copyYml") {
+    from("../../secret/persistence/persistence-jpa.yml")
+    into("src/main/resources/")
+}
+
+
+tasks.withType<ProcessResources> {
+    dependsOn(copyYml)
+}
+
 kotlin.sourceSets.main {
     setBuildDir("$buildDir")
 }
+
 
 dependencies {
     implementation(projects.goodgameDomain)

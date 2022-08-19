@@ -19,14 +19,12 @@ import people.songpagu.goodgame.application.token.generate.incoming.TokenGenerat
 import people.songpagu.goodgame.application.token.generate.outgoing.TokenGeneratePort
 import people.songpagu.goodgame.application.token.generate.service.TokenGenerateService
 import people.songpagu.goodgame.jpa.config.GoodGameJpaConfig
-import people.songpagu.goodgame.security.config.properties.GoodGameRedirectUriProperty
 import people.songpagu.infrastructure.jwt.config.GoodGameJwtConfig
 
 @Import(
     value = [
         GoodGameJpaConfig::class,
         GoodGameJwtConfig::class,
-        GoodGameRedirectUriProperty::class,
     ]
 )
 @Configuration

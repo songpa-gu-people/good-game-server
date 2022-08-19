@@ -1,6 +1,7 @@
 package people.songpagu.goodgame.security.config
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
@@ -15,6 +16,7 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import people.songpagu.goodgame.application.token.decode.incoming.TokenAuthenticateUseCase
 import people.songpagu.goodgame.security.config.filter.JwtAuthenticationFilter
+import people.songpagu.goodgame.security.config.properties.GoodGameRedirectUriProperty
 import people.songpagu.goodgame.security.domain.member.service.UserDetailsServiceImpl
 import people.songpagu.goodgame.security.domain.member.service.WebSecurityUserService
 import people.songpagu.goodgame.security.domain.oauth.handler.OAuth2FailHandler
@@ -31,6 +33,11 @@ import javax.servlet.Filter
     ]
 )
 @Configuration
+@EnableConfigurationProperties(
+    value = [
+        GoodGameRedirectUriProperty::class
+    ]
+)
 @ComponentScan("people.songpagu.goodgame.security.domain")
 class GoodGameSecurityConfig {
 
@@ -76,6 +83,7 @@ class GoodGameSecurityConfig {
                 .and()
                 .successHandler(oAuth2SuccessHandler)
                 .failureHandler(oAuth2FailHandler)
+                .permitAll()
                 .and()
                 .addFilterBefore(
                     jwtAuthenticationFilter(tokenAuthenticateUseCase, userDetailsService),

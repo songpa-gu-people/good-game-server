@@ -12,7 +12,7 @@ include(
     "goodgame-api",
     "goodgame-domain",
     "goodgame-application",
-    "goodgame-persistance:rdb",
+    "goodgame-persistence:rdb",
     "goodgame-security",
     "infrastructure:log",
     "infrastructure:jwt",

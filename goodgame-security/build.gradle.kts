@@ -32,7 +32,7 @@ kotlin.sourceSets.main {
 dependencies {
     implementation(projects.goodgameDomain)
     implementation(projects.goodgameApplication)
-    implementation(projects.goodgamePersistance.rdb)
+    implementation(projects.goodgamePersistence.rdb)
     implementation(projects.infrastructure.log)
     implementation(projects.infrastructure.jwt)
 
@@ -44,5 +44,5 @@ dependencies {
     implementation(Dependencies.Spring.Boot.OAUTH2)
     testImplementation(Dependencies.Spring.Boot.SECURITY_TEST)
 
-    testImplementation(testFixtures(projects.goodgamePersistance.rdb))
+    testImplementation(testFixtures(projects.goodgamePersistence.rdb))
 }

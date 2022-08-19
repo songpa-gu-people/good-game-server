@@ -13,7 +13,7 @@ dependencies {
     implementation(projects.goodgameSecurity)
     implementation(projects.goodgameApplication)
     implementation(projects.infrastructure.log)
-    implementation(projects.goodgamePersistance.rdb)
+    implementation(projects.goodgamePersistence.rdb)
 
     implementation(Dependencies.Spring.Boot.WEB)
 

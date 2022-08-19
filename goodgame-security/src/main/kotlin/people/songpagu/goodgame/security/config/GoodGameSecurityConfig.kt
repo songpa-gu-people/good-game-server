@@ -17,6 +17,7 @@ import people.songpagu.goodgame.application.token.decode.incoming.TokenAuthentic
 import people.songpagu.goodgame.security.config.filter.JwtAuthenticationFilter
 import people.songpagu.goodgame.security.domain.member.service.UserDetailsServiceImpl
 import people.songpagu.goodgame.security.domain.member.service.WebSecurityUserService
+import people.songpagu.goodgame.security.domain.oauth.handler.OAuth2FailHandler
 import people.songpagu.goodgame.security.domain.oauth.handler.OAuth2SuccessHandler
 import people.songpagu.infrastructure.log.Slf4j
 import people.songpagu.infrastructure.log.Slf4j.Companion.log
@@ -48,6 +49,7 @@ class GoodGameSecurityConfig {
         fun securityFilterChain(
             http: HttpSecurity,
             oAuth2SuccessHandler: OAuth2SuccessHandler,
+            oAuth2FailHandler: OAuth2FailHandler,
             webSecurityUserService: WebSecurityUserService,
             authorizationRequestRepository: AuthorizationRequestRepository<OAuth2AuthorizationRequest>,
             tokenAuthenticateUseCase: TokenAuthenticateUseCase,
@@ -73,7 +75,7 @@ class GoodGameSecurityConfig {
 
                 .and()
                 .successHandler(oAuth2SuccessHandler)
-                //todo failhandler
+                .failureHandler(oAuth2FailHandler)
                 .and()
                 .addFilterBefore(
                     jwtAuthenticationFilter(tokenAuthenticateUseCase, userDetailsService),

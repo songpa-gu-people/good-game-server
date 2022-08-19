@@ -41,7 +41,7 @@ internal class MemberJoinServiceUnitTest : BehaviorSpec({
 
     given("이미 회원가입이 되어 있으면") {
         val loginMember = LoginMember(memberNumber = "memberNumber")
-        val memberFindPort = MemberFindPort { _, _ -> loginMember }
+        val memberFindPort = MemberFindPort
 
         `when`("회원가입 및 로그인 시도시") {
             val joinCommand = MemberJoinUseCase.MemberJoinCommand(

@@ -1,6 +1,6 @@
 package people.songpagu.goodgame.jpa.domain.matching.converter
 
-import people.songpagu.goodgame.domain.matching.option.District
+import people.songpagu.goodgame.domain.matching.option.type.District
 import javax.persistence.AttributeConverter
 import kotlin.streams.toList
 
@@ -14,7 +14,7 @@ class DistrictConverter : AttributeConverter<List<District>, String> {
         return attribute.stream()
             .map { it.getCode() }
             .toList()
-            .joinToString { DELIMITER }
+            .joinToString(DELIMITER)
     }
 
     override fun convertToEntityAttribute(dbData: String?): List<District> {

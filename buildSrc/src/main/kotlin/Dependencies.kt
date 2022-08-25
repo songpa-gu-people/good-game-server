@@ -22,6 +22,10 @@ object Dependencies {
             const val TEST = "org.springframework.batch:spring-batch-test"
         }
 
+        object Rest {
+            const val REST_ASSURED = "io.rest-assured:spring-mock-mvc"
+        }
+
         object RestDocs {
             const val MOCK_MVC = "org.springframework.restdocs:spring-restdocs-mockmvc"
             const val ASCII_DOCTOR = "org.springframework.restdocs:spring-restdocs-asciidoctor"

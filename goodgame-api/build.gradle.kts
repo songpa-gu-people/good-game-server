@@ -17,6 +17,7 @@ dependencies {
 
     implementation(Dependencies.Spring.Boot.WEB)
 
+    testImplementation(Dependencies.Spring.Rest.REST_ASSURED)
     testImplementation(Dependencies.Spring.RestDocs.MOCK_MVC)
     testImplementation(Dependencies.Spring.RestDocs.ASCII_DOCTOR)
 

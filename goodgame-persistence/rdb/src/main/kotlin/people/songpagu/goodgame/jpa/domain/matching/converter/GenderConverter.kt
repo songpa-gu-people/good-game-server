@@ -14,7 +14,7 @@ class GenderConverter : AttributeConverter<List<Gender>, String> {
         return attribute.stream()
             .map { it.name }
             .toList()
-            .joinToString { DELIMITER }
+            .joinToString(DELIMITER)
     }
 
     override fun convertToEntityAttribute(dbData: String?): List<Gender> {

@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.domain.matching.option
+package people.songpagu.goodgame.domain.matching.option.type
 
 import people.songpagu.goodgame.domain.config.CommonType
 

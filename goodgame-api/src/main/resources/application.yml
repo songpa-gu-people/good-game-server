@@ -12,7 +12,9 @@ spring:
       on-profile: test
 
 authentication:
-  enabled: false
+  enabled: true
+  url-patterns:
+    - "/api/v1/**"
 
 
 ---

@@ -3,8 +3,8 @@ package people.songpagu.goodgame.domain.matching.option
 import people.songpagu.goodgame.domain.config.CommonType
 
 enum class District(
-    private val code: String,
-    private val desc: String
+    private val _code: String,
+    private val _desc: String
 ) : CommonType {
     JUNG_GU("JUNG_GU", "중구"),
     JONGRO_GU("JONGRO_GU", "종로구"),
@@ -38,13 +38,10 @@ enum class District(
         }
     }
 
-    override fun getDesc(): String {
-        return desc
-    }
+    override val desc: String
+        get() = this._desc
 
-    override fun getCode(): String {
-        return code
-    }
-
+    override val code: String
+        get() = this._code
 
 }

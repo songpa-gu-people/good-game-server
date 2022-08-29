@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse
 
 class JwtAuthenticationFilter(
     private val tokenAuthenticateUseCase: TokenAuthenticateUseCase,
-    private val userDetailServiceImpl: UserDetailsServiceImpl
+    private val userDetailServiceImpl: UserDetailsServiceImpl,
 ) : OncePerRequestFilter() {
 
     override fun doFilterInternal(
@@ -23,20 +23,23 @@ class JwtAuthenticationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val authentication = getAuthentication(request)
+        val authentication: Authentication? = getAuthentication(request)
 
-        if (authentication != null) {
+        authentication?.run {
             val context = SecurityContextHolder.getContext()
             context.authentication = authentication
         }
+
         super.doFilter(request, response, filterChain)
     }
 
     private fun getAuthentication(request: HttpServletRequest): Authentication? {
-        val accessToken = request.getHeader(HttpHeaders.AUTHORIZATION)
+        val accessToken: String? = request.getHeader(HttpHeaders.AUTHORIZATION)
+
         if (accessToken.isNullOrBlank()) {
             return null
         }
+
         return try {
             val memberNumber = tokenAuthenticateUseCase.validate(accessToken, LocalDateTime.now())
             val userDetails: UserDetails = userDetailServiceImpl.loadUserByUsername(memberNumber)

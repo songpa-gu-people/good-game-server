@@ -1,14 +1,13 @@
 package people.songpagu.goodgame.api.domain.matching.option
 
 import com.fasterxml.jackson.core.type.TypeReference
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import people.songpagu.goodgame.api.domain.response.ApiResponse
+import people.songpagu.goodgame.api.config.common.response.ApiResponse
+import people.songpagu.goodgame.api.domain.matching.option.response.MatchingOptionResponse
 import people.songpagu.goodgame.api.test.GoodGameApiTest
 import people.songpagu.goodgame.api.test.GoodGameApiTestContext
-import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionFindUseCase
 import people.songpagu.goodgame.application.token.generate.incoming.TokenGenerateUseCase
 import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender
@@ -17,7 +16,7 @@ import people.songpagu.goodgame.jpa.domain.matching.entity.MatchingOptionEntity
 import people.songpagu.goodgame.jpa.domain.matching.repository.MatchingOptionJpaRepository
 import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
 import people.songpagu.goodgame.jpa.domain.member.repository.MemberJpaRepository
-import java.util.*
+import java.util.UUID
 
 @GoodGameApiTestContext
 internal class MatchingOptionControllerTest(
@@ -39,13 +38,13 @@ internal class MatchingOptionControllerTest(
         val matchingOptionEntity = MatchingOptionEntity.create(
             memberNumber = memberNumber,
             districts = districts,
-            genders = genders
+            genders = genders,
         )
         matchingOptionJpaRepository.save(matchingOptionEntity)
         val token = jwtTokenGenerateUseCase.issue(TokenGenerateUseCase.TokenIssueCommand.accessToken(memberNumber))
 
         //when
-        val res = 나의_매칭옵션_요청(token)
+        val res: ApiResponse.Ok<MatchingOptionResponse> = 나의_매칭옵션_요청(token)
 
         //then
         assertThat(res.data?.memberNumber).isEqualTo(memberNumber)
@@ -54,9 +53,10 @@ internal class MatchingOptionControllerTest(
         assertThat(res.data?.exist).isEqualTo(true)
     }
 
-    private fun 나의_매칭옵션_요청(token: String) = getApi(
+    @Suppress("NonAsciiCharacters")
+    private fun 나의_매칭옵션_요청(token: String): ApiResponse.Ok<MatchingOptionResponse> = getApi(
         path = MatchingOptionControllerPath.findMyMatchingOption,
         token = token,
-        responseType = object : TypeReference<ApiResponse.Ok<MatchingOptionFindUseCase.MatchingOptionResponse>>() {}
+        responseType = object : TypeReference<ApiResponse.Ok<MatchingOptionResponse>>() {},
     )
 }

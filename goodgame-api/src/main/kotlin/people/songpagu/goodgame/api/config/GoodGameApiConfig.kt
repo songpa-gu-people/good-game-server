@@ -10,9 +10,6 @@ import people.songpagu.goodgame.application.matching.option.service.MatchingOpti
 import people.songpagu.goodgame.application.member.auth.login.incoming.LoginMemberNumberFindUseCase
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginMemberNumberFindPort
 import people.songpagu.goodgame.application.member.auth.login.service.LoginMemberNumberFindService
-import people.songpagu.goodgame.application.token.decode.incoming.TokenAuthenticateUseCase
-import people.songpagu.goodgame.application.token.decode.outgoing.TokenDecodePort
-import people.songpagu.goodgame.application.token.decode.service.TokenAuthenticateService
 import people.songpagu.goodgame.jpa.config.GoodGameJpaConfig
 import people.songpagu.goodgame.security.config.GoodGameSecurityConfig
 
@@ -31,10 +28,6 @@ import people.songpagu.goodgame.security.config.GoodGameSecurityConfig
 )
 @Configuration
 class GoodGameApiConfig {
-    @Bean
-    fun tokenAuthenticateUseCase(tokenDecodePort: TokenDecodePort): TokenAuthenticateUseCase {
-        return TokenAuthenticateService(tokenDecodePort)
-    }
 
     @Bean
     fun loginMemberNumberFindUseCase(port: LoginMemberNumberFindPort): LoginMemberNumberFindUseCase {

@@ -114,7 +114,10 @@ class GoodGameSecurityConfig {
 
         @Bean
         fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-            http.antMatcher("/**").csrf().disable().cors().disable().authorizeRequests().anyRequest().permitAll()
+            http.antMatcher("/**")
+                .csrf().disable()
+                .cors().disable()
+                .authorizeRequests().anyRequest().permitAll()
 
             return http.build()
         }

@@ -12,7 +12,7 @@ class DistrictConverter : AttributeConverter<List<District>, String> {
             return ""
         }
         return attribute.stream()
-            .map { it.getCode() }
+            .map { it.code }
             .toList()
             .joinToString(DELIMITER)
     }

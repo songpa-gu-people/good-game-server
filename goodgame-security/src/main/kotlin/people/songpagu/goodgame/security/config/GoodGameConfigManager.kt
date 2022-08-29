@@ -15,6 +15,9 @@ import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginToke
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginTokenRemovePort
 import people.songpagu.goodgame.application.member.auth.login.service.LoginTokenCreateService
 import people.songpagu.goodgame.application.member.auth.login.service.LoginTokenRemoveService
+import people.songpagu.goodgame.application.token.decode.incoming.TokenAuthenticateUseCase
+import people.songpagu.goodgame.application.token.decode.outgoing.TokenDecodePort
+import people.songpagu.goodgame.application.token.decode.service.TokenAuthenticateService
 import people.songpagu.goodgame.application.token.generate.incoming.TokenGenerateUseCase
 import people.songpagu.goodgame.application.token.generate.outgoing.TokenGeneratePort
 import people.songpagu.goodgame.application.token.generate.service.TokenGenerateService
@@ -45,6 +48,11 @@ class GoodGameConfigManager {
         loginTokenFindPort: LoginTokenFindPort,
     ): LoginTokenRemoveUseCase {
         return LoginTokenRemoveService(loginTokenFindPort, loginTokenRemovePort)
+    }
+
+    @Bean
+    fun tokenAuthenticateUseCase(tokenDecodePort: TokenDecodePort): TokenAuthenticateUseCase {
+        return TokenAuthenticateService(tokenDecodePort)
     }
 
     @Bean

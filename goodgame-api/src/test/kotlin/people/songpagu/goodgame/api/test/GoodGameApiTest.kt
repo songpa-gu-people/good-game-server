@@ -7,7 +7,7 @@ import io.restassured.specification.RequestSpecification
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.MediaType
-import people.songpagu.goodgame.api.domain.response.ApiResponse
+import people.songpagu.goodgame.api.config.common.response.ApiResponse
 
 
 @GoodGameApiTestContext
@@ -31,7 +31,8 @@ abstract class GoodGameApiTest {
         val res: String = baseConfig(token, parameter)
             .get(path)
             .asString()
-        return toCustomResponseFromMvcResult(res, responseType)
+
+        return objectMapper.readValue(res, responseType)
     }
 
     private fun baseConfig(token: String?, params: Map<String, String>?): RequestSpecification {
@@ -43,14 +44,4 @@ abstract class GoodGameApiTest {
             .`when`()
     }
 
-    private fun <T> toCustomResponseFromMvcResult(
-        response: String?,
-        typeReference: TypeReference<ApiResponse.Ok<T>>
-    ): ApiResponse.Ok<T> {
-        return try {
-            objectMapper.readValue(response, typeReference)
-        } catch (e: Exception) {
-            throw IllegalArgumentException(e.message)
-        }
-    }
 }

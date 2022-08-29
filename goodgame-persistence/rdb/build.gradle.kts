@@ -29,7 +29,7 @@ val copyYml = tasks.register<Copy>("copyYml") {
 }
 
 
-tasks.withType<ProcessResources> {
+tasks.processResources {
     dependsOn(copyYml)
 }
 
@@ -44,6 +44,9 @@ dependencies {
     implementation(projects.infrastructure.log)
 
     implementation("${Dependencies.Database.FLYWAY}:${Versions.FLY_WAY}")
+    implementation(Dependencies.Jackson.DATATYPE_JSR310)
+    implementation(Dependencies.Jackson.MODULE_KOTLIN)
+
     api(Dependencies.Spring.Boot.DATA_JPA)
 
     runtimeOnly(Dependencies.Database.H2)

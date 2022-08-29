@@ -12,7 +12,7 @@ class MatchingOptionFacade(
     override fun findByMemberNumber(memberNumber: String): MatchingOption? {
         val entity = matchingOptionJpaRepository.findByMemberNumber(memberNumber)
         return entity?.let {
-            MatchingOption(entity.memberNumber, entity.districts, entity.genders)
+            MatchingOption(entity.memberNumber, entity.districts.values, entity.genders.values)
         }
     }
 

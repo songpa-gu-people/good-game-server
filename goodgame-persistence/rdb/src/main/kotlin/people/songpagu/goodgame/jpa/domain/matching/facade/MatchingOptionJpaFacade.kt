@@ -6,7 +6,7 @@ import people.songpagu.goodgame.domain.matching.option.model.MatchingOption
 import people.songpagu.goodgame.jpa.domain.matching.repository.MatchingOptionJpaRepository
 
 @Repository
-class MatchingOptionFacade(
+class MatchingOptionJpaFacade(
     private val matchingOptionJpaRepository: MatchingOptionJpaRepository
 ) : MatchingOptionFindPort {
     override fun findByMemberNumber(memberNumber: String): MatchingOption? {

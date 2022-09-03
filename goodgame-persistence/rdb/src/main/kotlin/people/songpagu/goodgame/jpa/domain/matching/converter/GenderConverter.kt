@@ -1,28 +1,16 @@
 package people.songpagu.goodgame.jpa.domain.matching.converter
 
-import people.songpagu.goodgame.domain.member.type.Gender
+import people.songpagu.goodgame.jpa.config.mapper.JpaEntityMapper.jsonEntityMapper
+import people.songpagu.goodgame.jpa.domain.matching.collection.GenderCollection
 import javax.persistence.AttributeConverter
-import kotlin.streams.toList
 
-private const val DELIMITER = ","
 
-class GenderConverter : AttributeConverter<List<Gender>, String> {
-    override fun convertToDatabaseColumn(attribute: List<Gender>?): String {
-        if (attribute == null) {
-            return ""
-        }
-        return attribute.stream()
-            .map { it.name }
-            .toList()
-            .joinToString(DELIMITER)
+class GenderConverter : AttributeConverter<GenderCollection, String> {
+    override fun convertToDatabaseColumn(attribute: GenderCollection): String {
+        return jsonEntityMapper.writeValueAsString(attribute)
     }
 
-    override fun convertToEntityAttribute(dbData: String?): List<Gender> {
-        if (dbData.isNullOrBlank()) {
-            return mutableListOf()
-        }
-        return dbData.split(DELIMITER).stream()
-            .map { Gender.valueOf(it) }
-            .toList()
+    override fun convertToEntityAttribute(dbData: String?): GenderCollection? {
+        return dbData?.let { jsonEntityMapper.readValue(dbData, GenderCollection::class.java) }
     }
 }

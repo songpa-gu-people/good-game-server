@@ -2,13 +2,17 @@ package people.songpagu.goodgame.jpa.domain.matching.entity
 
 import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender
-import people.songpagu.goodgame.domain.member.type.LoginType
-import people.songpagu.goodgame.domain.member.type.MemberStatus
 import people.songpagu.goodgame.jpa.domain.base.BaseEntity
+import people.songpagu.goodgame.jpa.domain.matching.collection.DistrictCollection
+import people.songpagu.goodgame.jpa.domain.matching.collection.GenderCollection
 import people.songpagu.goodgame.jpa.domain.matching.converter.DistrictConverter
 import people.songpagu.goodgame.jpa.domain.matching.converter.GenderConverter
-import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Convert
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
 
 @Entity
 class MatchingOptionEntity(
@@ -16,24 +20,23 @@ class MatchingOptionEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(32)")
+    @Column(name = "member_number", nullable = false, columnDefinition = "VARCHAR(32) COMMENT '회원번호'")
     val memberNumber: String,
 
-    // TODO: json으로 바꾸기
     @Convert(converter = DistrictConverter::class)
-    @Column(nullable = false)
-    val districts: List<District> = mutableListOf(),
+    @Column(name = "districts", nullable = false, columnDefinition = "VARCHAR(1024) COMMENT '지역목록'")
+    val districts: DistrictCollection = DistrictCollection(),
 
     @Convert(converter = GenderConverter::class)
-    @Column(nullable = false)
-    val genders: List<Gender> = mutableListOf(),
+    @Column(name = "genders", nullable = false, columnDefinition = "VARCHAR(256) COMMENT '성별목록'")
+    val genders: GenderCollection = GenderCollection(),
 ) : BaseEntity() {
     companion object {
-        fun create(memberNumber: String, districts: MutableList<District>, genders: MutableList<Gender>): MatchingOptionEntity {
+        fun create(memberNumber: String, districts: List<District>, genders: List<Gender>): MatchingOptionEntity {
             return MatchingOptionEntity(
                 memberNumber = memberNumber,
-                districts = districts,
-                genders = genders
+                districts = DistrictCollection(districts),
+                genders = GenderCollection(genders)
             )
         }
     }

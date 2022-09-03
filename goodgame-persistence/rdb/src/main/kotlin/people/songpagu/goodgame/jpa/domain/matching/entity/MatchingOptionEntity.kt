@@ -35,9 +35,14 @@ class MatchingOptionEntity(
         fun create(memberNumber: String, districts: List<District>, genders: List<Gender>): MatchingOptionEntity {
             return MatchingOptionEntity(
                 memberNumber = memberNumber,
-                districts = DistrictCollection(districts),
-                genders = GenderCollection(genders)
+                districts = DistrictCollection(districts.toMutableList()),
+                genders = GenderCollection(genders.toMutableList())
             )
         }
+    }
+
+    fun update(districts: List<District>, genders: List<Gender>) {
+        this.districts.updateValues(districts)
+        this.genders.updateValues(genders)
     }
 }

@@ -5,8 +5,11 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionFindUseCase
+import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionSaveUseCase
 import people.songpagu.goodgame.application.matching.option.outgoing.MatchingOptionFindPort
+import people.songpagu.goodgame.application.matching.option.outgoing.UpdateMatchingOptionStatePort
 import people.songpagu.goodgame.application.matching.option.service.MatchingOptionFindService
+import people.songpagu.goodgame.application.matching.option.service.MatchingOptionSaveService
 import people.songpagu.goodgame.application.member.auth.login.incoming.LoginMemberNumberFindUseCase
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginMemberNumberFindPort
 import people.songpagu.goodgame.application.member.auth.login.service.LoginMemberNumberFindService
@@ -37,5 +40,10 @@ class GoodGameApiConfig {
     @Bean
     fun matchingOptionFindUseCase(port: MatchingOptionFindPort): MatchingOptionFindUseCase {
         return MatchingOptionFindService(port)
+    }
+
+    @Bean
+    fun matchingOptionSaveUseCase(port: UpdateMatchingOptionStatePort): MatchingOptionSaveUseCase {
+        return MatchingOptionSaveService(port)
     }
 }

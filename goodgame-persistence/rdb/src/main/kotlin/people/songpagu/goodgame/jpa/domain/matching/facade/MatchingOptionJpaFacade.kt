@@ -23,7 +23,7 @@ class MatchingOptionJpaFacade(
     }
 
     @Transactional
-    override fun update(command: UpdateMatchingOptionStatePort.UpdateMatchingOptionStateCommand) {
+    override fun saveOrUpdate(command: UpdateMatchingOptionStatePort.UpdateMatchingOptionStateCommand) {
         val memberNumber: String = command.memberNumber
         val districts: List<District> = command.districts
         val genders: List<Gender> = command.genders

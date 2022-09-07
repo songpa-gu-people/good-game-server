@@ -5,14 +5,19 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.RestAssured
 import io.restassured.specification.RequestSpecification
 import org.junit.jupiter.api.BeforeEach
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.MediaType
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
-
+import people.songpagu.goodgame.api.domain.matching.option.response.MatchingOptionResponse
+import people.songpagu.goodgame.jpa.config.mapper.JpaEntityMapper.jsonEntityMapper
+import people.songpagu.goodgame.jpa.lifecycle.TestJpaSweeper
 
 @GoodGameApiTestContext
-abstract class GoodGameApiTest {
-    private val objectMapper = ObjectMapper()
+abstract class GoodGameApiRestAssured {
+    @Suppress("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
+    private lateinit var testJpaSweeper: TestJpaSweeper
 
     @LocalServerPort
     var port = 0
@@ -20,9 +25,11 @@ abstract class GoodGameApiTest {
     @BeforeEach
     fun setUp() {
         RestAssured.port = port
+        testJpaSweeper.sweep()
+
     }
 
-    fun <T> getApi(
+    protected fun <T> getApi(
         path: String,
         token: String? = "",
         parameter: Map<String, String>? = mapOf(),
@@ -31,8 +38,20 @@ abstract class GoodGameApiTest {
         val res: String = baseConfig(token, parameter)
             .get(path)
             .asString()
+        return jsonEntityMapper.readValue(res, responseType)
+    }
 
-        return objectMapper.readValue(res, responseType)
+    protected fun <T> postApi(
+        path: String,
+        token: String? = "",
+        body: Any?,
+        responseType: TypeReference<ApiResponse.Ok<T>>
+    ): ApiResponse.Ok<T> {
+        val res: String = baseConfig(token, mapOf())
+            .body(jsonEntityMapper.writeValueAsString(body))
+            .post(path)
+            .asString()
+        return jsonEntityMapper.readValue(res, responseType)
     }
 
     private fun baseConfig(token: String?, params: Map<String, String>?): RequestSpecification {
@@ -43,5 +62,4 @@ abstract class GoodGameApiTest {
             .header("Authorization", token)
             .`when`()
     }
-
 }

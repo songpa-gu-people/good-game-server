@@ -4,7 +4,7 @@ import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender
 
 fun interface UpdateMatchingOptionStatePort {
-    fun update(command: UpdateMatchingOptionStateCommand)
+    fun saveOrUpdate(command: UpdateMatchingOptionStateCommand)
 
     data class UpdateMatchingOptionStateCommand(
         val memberNumber: String,

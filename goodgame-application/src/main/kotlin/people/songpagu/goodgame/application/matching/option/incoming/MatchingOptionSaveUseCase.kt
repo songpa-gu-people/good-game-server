@@ -4,7 +4,7 @@ import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender
 
 interface MatchingOptionSaveUseCase {
-    fun save(memberNumber: String, command: MatchingOptionSaveCommand)
+    fun saveOrUpdate(memberNumber: String, command: MatchingOptionSaveCommand)
 
     data class MatchingOptionSaveCommand(
         val districts: List<District> = emptyList(),

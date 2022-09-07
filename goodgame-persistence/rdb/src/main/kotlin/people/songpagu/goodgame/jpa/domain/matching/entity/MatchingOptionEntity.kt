@@ -20,7 +20,12 @@ class MatchingOptionEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column(name = "member_number", nullable = false, columnDefinition = "VARCHAR(32) COMMENT '회원번호'")
+    @Column(
+        name = "member_number",
+        nullable = false,
+        unique = true,
+        columnDefinition = "VARCHAR(32) COMMENT '회원번호'"
+    )
     val memberNumber: String,
 
     @Convert(converter = DistrictConverter::class)

@@ -43,7 +43,10 @@ class GoodGameApiConfig {
     }
 
     @Bean
-    fun matchingOptionSaveUseCase(port: UpdateMatchingOptionStatePort): MatchingOptionSaveUseCase {
-        return MatchingOptionSaveService(port)
+    fun matchingOptionSaveUseCase(
+        updateMatchingOptionStatePort: UpdateMatchingOptionStatePort,
+        matchingOptionFindPort: MatchingOptionFindPort,
+    ): MatchingOptionSaveUseCase {
+        return MatchingOptionSaveService(updateMatchingOptionStatePort, matchingOptionFindPort)
     }
 }

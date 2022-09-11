@@ -7,13 +7,12 @@ import people.songpagu.goodgame.jpa.domain.matching.collection.DistrictCollectio
 import people.songpagu.goodgame.jpa.domain.matching.collection.GenderCollection
 import people.songpagu.goodgame.jpa.domain.matching.converter.DistrictConverter
 import people.songpagu.goodgame.jpa.domain.matching.converter.GenderConverter
-import javax.persistence.Column
-import javax.persistence.Convert
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
+@Table(
+    name = "matching_option",
+    uniqueConstraints = [UniqueConstraint(name = "uk_matching_option_1", columnNames = ["member_number"])],
+)
 @Entity
 class MatchingOptionEntity(
     @Id
@@ -23,7 +22,6 @@ class MatchingOptionEntity(
     @Column(
         name = "member_number",
         nullable = false,
-        unique = true,
         columnDefinition = "VARCHAR(32) COMMENT '회원번호'"
     )
     val memberNumber: String,
@@ -37,8 +35,14 @@ class MatchingOptionEntity(
     val genders: GenderCollection = GenderCollection(),
 ) : BaseEntity() {
     companion object {
-        fun create(memberNumber: String, districts: List<District>, genders: List<Gender>): MatchingOptionEntity {
+        fun of(
+            id: Long? = null,
+            memberNumber: String,
+            districts: List<District>,
+            genders: List<Gender>,
+        ): MatchingOptionEntity {
             return MatchingOptionEntity(
+                id = id,
                 memberNumber = memberNumber,
                 districts = DistrictCollection(districts.toMutableList()),
                 genders = GenderCollection(genders.toMutableList())

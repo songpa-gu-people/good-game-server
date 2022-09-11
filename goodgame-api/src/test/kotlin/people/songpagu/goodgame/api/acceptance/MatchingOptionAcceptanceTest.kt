@@ -11,6 +11,7 @@ import people.songpagu.goodgame.api.domain.matching.option.response.MatchingOpti
 import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
 import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender
+import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
 
 internal class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
 
@@ -23,14 +24,14 @@ internal class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
     @Test
     internal fun test1() {
         //given
-        val memberEntity = initKakaoMember()
+        val memberEntity: MemberEntity = initKakaoMember()
         val token = createToken(memberEntity)
         val memberNumber = memberEntity.memberNumber
 
         //저장 요청
         val saveRequest: MatchingOptionSaveOrUpdateRequest = MatchingOptionSaveOrUpdateRequest(
-            mutableListOf(District.DOBONG_GU, District.DONGDAEMUN_GU),
-            mutableListOf(Gender.MAN)
+            listOf(District.DOBONG_GU, District.DONGDAEMUN_GU),
+            listOf(Gender.MAN)
         )
         나의매칭옵션_저장_요청(token, saveRequest)
 
@@ -40,8 +41,8 @@ internal class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
 
         //수정 요청
         val updateRequest: MatchingOptionSaveOrUpdateRequest = MatchingOptionSaveOrUpdateRequest(
-            mutableListOf(District.GANGNAM_GU, District.GANGBUK_GU),
-            mutableListOf(Gender.WOMAN, Gender.MAN)
+            listOf(District.GANGNAM_GU, District.GANGBUK_GU),
+            listOf(Gender.WOMAN, Gender.MAN)
         )
         나의매칭옵션_저장_요청(token, updateRequest)
 
@@ -69,8 +70,8 @@ internal class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
     ) {
         postApi(
             path = MatchingOptionControllerPath.saveOrUpdate,
-            token,
-            request,
+            token = token,
+            body = request,
             object : TypeReference<ApiResponse.Ok<Void>>() {},
         )
     }

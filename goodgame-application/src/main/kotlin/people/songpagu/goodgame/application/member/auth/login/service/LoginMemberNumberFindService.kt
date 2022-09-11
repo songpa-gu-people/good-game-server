@@ -7,6 +7,6 @@ class LoginMemberNumberFindService(
     private val loginMemberNumberFindPort: LoginMemberNumberFindPort
 ) : LoginMemberNumberFindUseCase {
     override fun findMemberNumberBy(refreshToken: String): String {
-        return loginMemberNumberFindPort.findMemberNumber(refreshToken)
+        return loginMemberNumberFindPort.findMemberNumberBy(refreshToken)
     }
 }

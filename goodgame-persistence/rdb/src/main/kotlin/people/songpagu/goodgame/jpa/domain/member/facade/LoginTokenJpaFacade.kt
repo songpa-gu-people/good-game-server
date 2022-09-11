@@ -42,7 +42,7 @@ class LoginTokenJpaFacade(
         loginTokenJpaRepository.save(loginTokenEntity)
     }
 
-    override fun findMemberNumber(subject: String): String {
-        return loginTokenJpaRepository.findBySubject(subject).memberNumber
+    override fun findMemberNumberBy(subjectOfToken: String): String {
+        return loginTokenJpaRepository.findBySubject(subjectOfToken).memberNumber
     }
 }

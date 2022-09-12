@@ -12,6 +12,7 @@ import people.songpagu.goodgame.jpa.domain.member.entity.MemberPrivacyEntity
 import people.songpagu.goodgame.jpa.domain.member.repository.MemberJpaRepository
 import people.songpagu.goodgame.jpa.domain.member.repository.MemberLoginHistoryJpaRepository
 import people.songpagu.goodgame.jpa.domain.member.repository.MemberPrivacyJpaRepository
+import javax.transaction.Transactional
 
 @Repository
 class MemberJpaFacade(
@@ -20,6 +21,7 @@ class MemberJpaFacade(
     private val memberLoginHistoryJpaRepository: MemberLoginHistoryJpaRepository,
 ) : MemberCreatePort, MemberFindPort, LoginHistoryRecordPort {
 
+    @Transactional
     override fun create(command: MemberCreatePort.MemberCreateCommand): LoginMember {
         val memberEntity = memberJpaRepository.save(
             MemberEntity.create(

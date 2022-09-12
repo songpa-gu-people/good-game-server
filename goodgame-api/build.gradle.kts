@@ -16,12 +16,13 @@ dependencies {
     implementation(projects.goodgamePersistence.rdb)
 
     implementation(Dependencies.Spring.Boot.WEB)
+    implementation(Dependencies.Spring.Boot.OAUTH2)
 
     testImplementation(Dependencies.Spring.Rest.REST_ASSURED)
     testImplementation(Dependencies.Spring.RestDocs.MOCK_MVC)
     testImplementation(Dependencies.Spring.RestDocs.ASCII_DOCTOR)
 
-    implementation(Dependencies.Spring.Boot.OAUTH2)
+    testImplementation(testFixtures(projects.goodgamePersistence.rdb))
 }
 
 tasks {

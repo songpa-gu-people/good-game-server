@@ -57,4 +57,5 @@ dependencies {
     kapt(Dependencies.Querydsl.APT)
 
     testFixturesImplementation(projects.infrastructure.log)
+    testFixturesImplementation(projects.goodgameDomain)
 }

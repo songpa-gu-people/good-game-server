@@ -9,6 +9,7 @@ import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginToke
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginTokenRemovePort
 import people.songpagu.goodgame.jpa.domain.member.entity.LoginTokenEntity
 import people.songpagu.goodgame.jpa.domain.member.repository.LoginTokenJpaRepository
+import javax.transaction.Transactional
 
 @Repository
 class LoginTokenJpaFacade(
@@ -30,6 +31,7 @@ class LoginTokenJpaFacade(
         loginTokenJpaRepository.deleteAllById(ids)
     }
 
+    @Transactional
     override fun create(command: LoginTokenCreateCommand) {
         val loginTokenEntity = LoginTokenEntity(
             tokenType = command.loginTokenType,
@@ -40,7 +42,7 @@ class LoginTokenJpaFacade(
         loginTokenJpaRepository.save(loginTokenEntity)
     }
 
-    override fun findMemberNumber(subject: String): String {
-        return loginTokenJpaRepository.findBySubject(subject).memberNumber
+    override fun findMemberNumberBy(subjectOfToken: String): String {
+        return loginTokenJpaRepository.findBySubject(subjectOfToken).memberNumber
     }
 }

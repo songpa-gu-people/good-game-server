@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.api.domain.member.dto.response
+package people.songpagu.goodgame.api.domain.member.privacy.dto.response
 
 import people.songpagu.goodgame.application.member.privacy.incoming.MemberPrivacyFindUseCase
 import people.songpagu.goodgame.domain.member.type.Gender

@@ -1,7 +1,7 @@
-package people.songpagu.goodgame.api.domain.member.handler
+package people.songpagu.goodgame.api.domain.member.privacy.handler
 
 import people.songpagu.goodgame.api.config.layer.Handler
-import people.songpagu.goodgame.api.domain.member.adapter.MemberPrivacyAdapter
+import people.songpagu.goodgame.api.domain.member.privacy.adapter.MemberPrivacyAdapter
 import people.songpagu.goodgame.application.member.privacy.incoming.MemberPrivacyFindUseCase.MemberPrivacyAnswer
 
 @Handler

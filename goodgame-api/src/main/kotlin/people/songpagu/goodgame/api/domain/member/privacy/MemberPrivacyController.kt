@@ -1,11 +1,11 @@
-package people.songpagu.goodgame.api.domain.member
+package people.songpagu.goodgame.api.domain.member.privacy
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
-import people.songpagu.goodgame.api.domain.member.dto.response.MemberPrivacyResponse
-import people.songpagu.goodgame.api.domain.member.handler.MemberPrivacyHandler
+import people.songpagu.goodgame.api.domain.member.privacy.dto.response.MemberPrivacyResponse
+import people.songpagu.goodgame.api.domain.member.privacy.handler.MemberPrivacyHandler
 import people.songpagu.goodgame.application.member.privacy.incoming.MemberPrivacyFindUseCase.MemberPrivacyAnswer
 import people.songpagu.goodgame.security.domain.member.UserDetailsImpl
 

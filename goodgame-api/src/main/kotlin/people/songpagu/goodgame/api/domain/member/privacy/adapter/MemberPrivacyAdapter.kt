@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.api.domain.member.adapter
+package people.songpagu.goodgame.api.domain.member.privacy.adapter
 
 import people.songpagu.goodgame.api.config.layer.Adapter
 import people.songpagu.goodgame.application.member.privacy.incoming.MemberPrivacyFindUseCase

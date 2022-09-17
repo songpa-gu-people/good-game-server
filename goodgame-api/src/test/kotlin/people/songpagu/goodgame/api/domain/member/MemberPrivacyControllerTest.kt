@@ -5,7 +5,8 @@ import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
-import people.songpagu.goodgame.api.domain.member.dto.response.MemberPrivacyResponse
+import people.songpagu.goodgame.api.domain.member.privacy.MemberPrivacyControllerPath
+import people.songpagu.goodgame.api.domain.member.privacy.dto.response.MemberPrivacyResponse
 import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
 import people.songpagu.goodgame.domain.member.type.Gender
 import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity

@@ -72,7 +72,7 @@ internal class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
             path = MatchingOptionControllerPath.saveOrUpdate,
             token = token,
             body = request,
-            object : TypeReference<ApiResponse.Ok<Void>>() {},
+            responseType = object : TypeReference<ApiResponse.Ok<Void>>() {},
         )
     }
 

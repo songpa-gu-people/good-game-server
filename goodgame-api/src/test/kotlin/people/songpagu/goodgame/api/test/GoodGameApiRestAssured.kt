@@ -24,7 +24,6 @@ abstract class GoodGameApiRestAssured {
     fun setUp() {
         RestAssured.port = port
         testJpaSweeper.sweep()
-
     }
 
     protected fun <T> getApi(

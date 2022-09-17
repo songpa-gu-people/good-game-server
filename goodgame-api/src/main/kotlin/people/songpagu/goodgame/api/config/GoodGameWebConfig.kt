@@ -5,17 +5,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Import
 import org.springframework.format.FormatterRegistry
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import people.songpagu.goodgame.api.config.common.FormatResourceFactory
 import people.songpagu.goodgame.api.config.interceptor.AuthenticationInterceptor
-import people.songpagu.goodgame.application.token.decode.incoming.TokenAuthenticateUseCase
-import people.songpagu.goodgame.application.token.decode.outgoing.TokenDecodePort
-import people.songpagu.goodgame.application.token.decode.service.TokenAuthenticateService
+import people.songpagu.goodgame.api.domain.token.AccessTokenControllerPath
 
 @Configuration
 @EnableConfigurationProperties(value = [AuthenticationProperties::class])
@@ -32,7 +28,7 @@ class GoodGameWebConfig(
         if (authenticationProperties.enabled) {
             registry.addInterceptor(authenticationInterceptor)
                 .addPathPatterns(authenticationProperties.urlPatterns)
-                .excludePathPatterns("/api/v1/token/access")
+                .excludePathPatterns(AccessTokenControllerPath.getAccessToken)
         }
     }
 

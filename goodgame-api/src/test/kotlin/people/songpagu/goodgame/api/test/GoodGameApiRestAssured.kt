@@ -1,7 +1,6 @@
 package people.songpagu.goodgame.api.test
 
 import com.fasterxml.jackson.core.type.TypeReference
-import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.RestAssured
 import io.restassured.specification.RequestSpecification
 import org.junit.jupiter.api.BeforeEach
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.http.MediaType
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
-import people.songpagu.goodgame.api.domain.matching.option.response.MatchingOptionResponse
 import people.songpagu.goodgame.jpa.config.mapper.JpaEntityMapper.jsonEntityMapper
 import people.songpagu.goodgame.jpa.lifecycle.TestJpaSweeper
 

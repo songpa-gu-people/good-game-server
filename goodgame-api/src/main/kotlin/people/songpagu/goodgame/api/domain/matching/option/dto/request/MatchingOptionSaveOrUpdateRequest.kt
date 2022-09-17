@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.api.domain.matching.option.dto
+package people.songpagu.goodgame.api.domain.matching.option.dto.request
 
 import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender

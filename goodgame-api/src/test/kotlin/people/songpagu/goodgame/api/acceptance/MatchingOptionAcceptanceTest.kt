@@ -6,8 +6,8 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
 import people.songpagu.goodgame.api.domain.matching.option.MatchingOptionControllerPath
-import people.songpagu.goodgame.api.domain.matching.option.dto.MatchingOptionSaveOrUpdateRequest
-import people.songpagu.goodgame.api.domain.matching.option.response.MatchingOptionResponse
+import people.songpagu.goodgame.api.domain.matching.option.dto.request.MatchingOptionSaveOrUpdateRequest
+import people.songpagu.goodgame.api.domain.matching.option.dto.response.MatchingOptionResponse
 import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
 import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender

@@ -9,9 +9,9 @@ class MemberPrivacyFindService(
     private val memberPrivacyFindPort: MemberPrivacyFindPort
 ) : MemberPrivacyFindUseCase {
     override fun findMemberPrivacyBy(memberNumber: String): MemberPrivacyAnswer {
-        val memberPrivacy: MemberPrivacy? = memberPrivacyFindPort.findBy(memberNumber)
+        val memberPrivacy: MemberPrivacy = memberPrivacyFindPort.findBy(memberNumber)
         return MemberPrivacyAnswer(
-            memberNumber = memberPrivacy!!.memberNumber,
+            memberNumber = memberPrivacy.memberNumber,
             email = memberPrivacy.email,
             gender = memberPrivacy.gender,
             memberPrivacyStatus = memberPrivacy.memberPrivacyStatus

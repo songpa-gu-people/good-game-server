@@ -10,15 +10,14 @@ import people.songpagu.goodgame.jpa.domain.member.repository.MemberPrivacyJpaRep
 class MemberPrivacyJpaFacade(
     private val memberPrivacyJpaRepository: MemberPrivacyJpaRepository
 ) : MemberPrivacyFindPort {
-    override fun findBy(memberNumber: String): MemberPrivacy? {
+    override fun findBy(memberNumber: String): MemberPrivacy {
         val memberPrivacyEntity: MemberPrivacyEntity? = memberPrivacyJpaRepository.findByMemberNumber(memberNumber)
-        return memberPrivacyEntity?.let {
-            MemberPrivacy(
-                memberNumber = memberPrivacyEntity.memberNumber,
-                email = memberPrivacyEntity.email,
-                gender = memberPrivacyEntity.gender,
-                memberPrivacyStatus = memberPrivacyEntity.status,
-            )
-        }
+        requireNotNull(memberPrivacyEntity)
+        return MemberPrivacy(
+            memberNumber = memberPrivacyEntity.memberNumber,
+            email = memberPrivacyEntity.email,
+            gender = memberPrivacyEntity.gender,
+            memberPrivacyStatus = memberPrivacyEntity.status,
+        )
     }
 }

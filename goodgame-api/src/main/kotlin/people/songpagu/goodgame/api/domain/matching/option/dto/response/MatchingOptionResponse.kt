@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.api.domain.matching.option.response
+package people.songpagu.goodgame.api.domain.matching.option.dto.response
 
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionFindUseCase
 import people.songpagu.goodgame.domain.matching.option.type.District

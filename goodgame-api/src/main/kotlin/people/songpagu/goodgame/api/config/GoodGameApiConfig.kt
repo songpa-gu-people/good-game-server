@@ -13,6 +13,9 @@ import people.songpagu.goodgame.application.matching.option.service.MatchingOpti
 import people.songpagu.goodgame.application.member.auth.login.incoming.LoginMemberNumberFindUseCase
 import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginMemberNumberFindPort
 import people.songpagu.goodgame.application.member.auth.login.service.LoginMemberNumberFindService
+import people.songpagu.goodgame.application.member.privacy.incoming.MemberPrivacyFindUseCase
+import people.songpagu.goodgame.application.member.privacy.outgoing.MemberPrivacyFindPort
+import people.songpagu.goodgame.application.member.privacy.service.MemberPrivacyFindService
 import people.songpagu.goodgame.jpa.config.GoodGameJpaConfig
 import people.songpagu.goodgame.security.config.GoodGameSecurityConfig
 
@@ -48,5 +51,12 @@ class GoodGameApiConfig {
         matchingOptionFindPort: MatchingOptionFindPort,
     ): MatchingOptionSaveUseCase {
         return MatchingOptionSaveService(updateMatchingOptionStatePort, matchingOptionFindPort)
+    }
+
+    @Bean
+    fun memberPrivacyFindUseCase(
+        memberPrivacyFindPort: MemberPrivacyFindPort
+    ): MemberPrivacyFindUseCase {
+        return MemberPrivacyFindService(memberPrivacyFindPort)
     }
 }

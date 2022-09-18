@@ -12,7 +12,7 @@ class AccessTokenController(
     private val accessTokenGenerateHandler: AccessTokenGenerateHandler,
 ) {
 
-    @GetMapping("/api/v1/token/access")
+    @GetMapping(AccessTokenControllerPath.getAccessToken)
     fun getAccessToken(@CookieValue(REFRESH_TOKEN_NAME) refreshToken: String): ApiResponse<String> {
         val accessToken = accessTokenGenerateHandler.issue(refreshToken)
         return ApiResponse.Ok(accessToken)

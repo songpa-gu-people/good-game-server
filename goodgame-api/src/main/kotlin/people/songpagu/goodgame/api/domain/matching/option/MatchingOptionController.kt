@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
-import people.songpagu.goodgame.api.domain.matching.option.dto.MatchingOptionSaveOrUpdateRequest
+import people.songpagu.goodgame.api.domain.matching.option.dto.request.MatchingOptionSaveOrUpdateRequest
+import people.songpagu.goodgame.api.domain.matching.option.dto.response.MatchingOptionResponse
 import people.songpagu.goodgame.api.domain.matching.option.handler.MatchingOptionHandler
-import people.songpagu.goodgame.api.domain.matching.option.response.MatchingOptionResponse
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionFindUseCase.MatchingOptionAnswer
 import people.songpagu.goodgame.security.domain.member.UserDetailsImpl
 

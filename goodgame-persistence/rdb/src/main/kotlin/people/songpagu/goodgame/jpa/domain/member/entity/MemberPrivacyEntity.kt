@@ -3,17 +3,7 @@ package people.songpagu.goodgame.jpa.domain.member.entity
 import people.songpagu.goodgame.domain.member.type.Gender
 import people.songpagu.goodgame.domain.member.type.MemberPrivacyStatus
 import people.songpagu.goodgame.jpa.domain.base.BaseEntity
-import javax.persistence.CascadeType
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Enumerated
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Index
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(
@@ -22,6 +12,9 @@ import javax.persistence.Table
         Index(name = "idx_member_1", columnList = "email"),
         Index(name = "idx_member_2", columnList = "gender"),
     ],
+    uniqueConstraints = [
+        UniqueConstraint(name = "uk_member_privacy_1", columnNames = ["member_number"]),
+    ],
 )
 class MemberPrivacyEntity(
     @Id
@@ -29,9 +22,8 @@ class MemberPrivacyEntity(
     @Column(name = "id")
     val id: Long? = null,
 
-    @ManyToOne(cascade = [CascadeType.PERSIST])
-    @JoinColumn(name = "member_id")
-    val memberEntity: MemberEntity,
+    @Column(name = "member_number", nullable = false, columnDefinition = "VARCHAR(32) COMMENT '회원번호'")
+    val memberNumber: String,
 
     _status: MemberPrivacyStatus,
     _email: String,
@@ -58,7 +50,7 @@ class MemberPrivacyEntity(
             gender: Gender,
         ): MemberPrivacyEntity {
             return MemberPrivacyEntity(
-                memberEntity = memberEntity,
+                memberNumber = memberEntity.memberNumber,
                 _status = MemberPrivacyStatus.IN_PROGRESS,
                 _email = email,
                 _gender = gender

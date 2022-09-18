@@ -1,7 +1,7 @@
 package people.songpagu.goodgame.api.domain.matching.option.adapter
 
 import people.songpagu.goodgame.api.config.layer.Adapter
-import people.songpagu.goodgame.api.domain.matching.option.dto.MatchingOptionSaveOrUpdateRequest
+import people.songpagu.goodgame.api.domain.matching.option.dto.request.MatchingOptionSaveOrUpdateRequest
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionFindUseCase
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionSaveUseCase
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionSaveUseCase.MatchingOptionSaveCommand

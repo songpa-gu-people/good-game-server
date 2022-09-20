@@ -11,11 +11,11 @@ import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
 import people.songpagu.goodgame.domain.member.type.Gender
 import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
 
-internal class MemberPrivacyControllerTest : GoodGameApiTestFixtureBundle() {
+class MemberPrivacyControllerTest : GoodGameApiTestFixtureBundle() {
 
     @DisplayName("나의 memberPrivacy 정보 요청 api 테스트")
     @Test
-    internal fun getMyMemberPrivacy() {
+    fun getMyMemberPrivacy() {
         val gender = Gender.WOMAN
         val member: MemberEntity = initKakaoMember(gender)
         val token = createToken(member)

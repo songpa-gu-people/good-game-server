@@ -29,7 +29,7 @@ class MemberPrivacyEntity(
     _email: String,
     _gender: Gender,
 ) : BaseEntity() {
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", columnDefinition = "VARCHAR(20) COMMENT '개인정보 수집상태'")
     var status: MemberPrivacyStatus = _status
         private set
@@ -38,7 +38,7 @@ class MemberPrivacyEntity(
     var email: String = _email
         private set
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", columnDefinition = "VARCHAR(20) COMMENT '성별'")
     var gender: Gender = _gender
         private set

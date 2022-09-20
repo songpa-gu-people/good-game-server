@@ -13,7 +13,7 @@ import people.songpagu.goodgame.domain.matching.option.type.District
 import people.songpagu.goodgame.domain.member.type.Gender
 import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
 
-internal class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
+class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
 
     /**
      * 매칭 옵션 저장
@@ -22,7 +22,7 @@ internal class MatchingOptionAcceptanceTest : GoodGameApiTestFixtureBundle() {
      */
     @DisplayName("매칭옵션 관리 인수 테스트")
     @Test
-    internal fun test1() {
+    fun test1() {
         //given
         val memberEntity: MemberEntity = initKakaoMember()
         val token = createToken(memberEntity)

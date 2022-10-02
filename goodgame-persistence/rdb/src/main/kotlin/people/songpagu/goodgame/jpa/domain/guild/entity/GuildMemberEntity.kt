@@ -1,10 +1,10 @@
 package people.songpagu.goodgame.jpa.domain.guild.entity
 
-import people.songpagu.goodgame.domain.guild.type.GuildMemberRank
+import people.songpagu.goodgame.domain.guild.type.GuildMemberPosition
 import javax.persistence.*
 
 @Table(
-    name = "guild"
+    name = "guild_member"
 )
 @Entity
 class GuildMemberEntity(
@@ -13,21 +13,21 @@ class GuildMemberEntity(
     val id: Long? = null,
 
     @Column(
-        name = "guild_number",
+        name = "member_number",
         nullable = false,
         columnDefinition = "VARCHAR(32) COMMENT '멤버번호'"
     )
     val memberNumber: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "guild_num")
+    @JoinColumn(name = "guild_id")
     val guildEntity: GuildEntity,
 
-    _guildMemberRank: GuildMemberRank,
+    _guildMemberPosition: GuildMemberPosition,
 ) {
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "VARCHAR(128) COMMENT '길드 멤버 등급'")
-    var guildMemberRank: GuildMemberRank = _guildMemberRank
+    @Column(name = "guild_member_position", columnDefinition = "VARCHAR(128) COMMENT '길드 멤버 등급'")
+    var guildMemberPosition: GuildMemberPosition = _guildMemberPosition
         private set
 
     companion object {
@@ -38,7 +38,7 @@ class GuildMemberEntity(
             return GuildMemberEntity(
                 memberNumber = memberNumber,
                 guildEntity = guildEntity,
-                _guildMemberRank = GuildMemberRank.MASTER,
+                _guildMemberPosition = GuildMemberPosition.MASTER,
             )
         }
     }

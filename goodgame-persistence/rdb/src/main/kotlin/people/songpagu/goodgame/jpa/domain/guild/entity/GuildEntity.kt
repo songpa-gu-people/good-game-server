@@ -4,8 +4,13 @@ import people.songpagu.goodgame.common.GoodGameUuidGenerator
 import people.songpagu.goodgame.jpa.domain.base.BaseEntity
 import javax.persistence.*
 
+const val GUILD_NAME_MAX_LENGTH: Int = 20
+
 @Table(
-    name = "guild"
+    name = "guild",
+    uniqueConstraints = [
+        UniqueConstraint(name = "uk_guild_1", columnNames = ["guild_number"]),
+    ],
 )
 @Entity
 class GuildEntity(
@@ -23,7 +28,7 @@ class GuildEntity(
     @Column(
         name = "guild_name",
         nullable = false,
-        columnDefinition = "VARCHAR(16) COMMENT '길드이름'"
+        columnDefinition = "VARCHAR(${GUILD_NAME_MAX_LENGTH}) COMMENT '길드이름'"
     )
     val guildName: String,
 

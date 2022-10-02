@@ -14,6 +14,7 @@ import people.songpagu.goodgame.security.domain.member.UserDetailsImpl
 class GuildController(
     private val guildHandler: GuildHandler
 ) {
+
     @PostMapping(GuildControllerPath.createGuild)
     fun createGuild(
         @AuthenticationPrincipal member: UserDetailsImpl,

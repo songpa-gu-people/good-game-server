@@ -1,6 +1,6 @@
 package people.songpagu.goodgame.domain.guild.type
 
-enum class GuildMemberRank(
+enum class GuildMemberPosition(
     val _desc: String,
 ) {
     MASTER("길드장"),

@@ -13,7 +13,7 @@ class GuildJpaFacade(
     override fun create(command: GuildCreateCommand) {
         val guildEntity: GuildEntity = GuildEntity.create(
             createMemberNumber = command.createMemberNumber,
-            command.guildName
+            guildName = command.guildName
         )
         guildJpaRepository.save(guildEntity)
     }

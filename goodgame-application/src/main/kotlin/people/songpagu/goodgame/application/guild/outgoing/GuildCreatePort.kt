@@ -1,7 +1,7 @@
 package people.songpagu.goodgame.application.guild.outgoing
 
-import people.songpagu.goodgame.application.guild.incoming.GuildCreateUseCase
+import people.songpagu.goodgame.application.guild.incoming.GuildCreateUseCase.GuildCreateCommand
 
 interface GuildCreatePort {
-    fun create(guildCreateCommand: GuildCreateUseCase.GuildCreateCommand)
+    fun create(guildCreateCommand: GuildCreateCommand)
 }

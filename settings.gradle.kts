@@ -14,6 +14,7 @@ include(
     "goodgame-application",
     "goodgame-persistence:rdb",
     "goodgame-security",
+    "goodgame-common",
     "infrastructure:log",
     "infrastructure:jwt",
 )

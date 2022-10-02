@@ -49,9 +49,4 @@ class MatchingOptionEntity(
             )
         }
     }
-
-    fun update(districts: List<District>, genders: List<Gender>) {
-        this.districts.updateValues(districts)
-        this.genders.updateValues(genders)
-    }
 }

@@ -41,6 +41,8 @@ kotlin.sourceSets.main {
 dependencies {
     implementation(projects.goodgameDomain)
     implementation(projects.goodgameApplication)
+    implementation(projects.goodgameCommon)
+
     implementation(projects.infrastructure.log)
 
     implementation("${Dependencies.Database.FLYWAY}:${Versions.FLY_WAY}")

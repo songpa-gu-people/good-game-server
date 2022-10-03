@@ -33,7 +33,7 @@ class MatchingOptionController(
     fun saveOrUpdate(
         @AuthenticationPrincipal member: UserDetailsImpl,
         @Validated @RequestBody matchingOptionSaveOrUpdateRequest: MatchingOptionSaveOrUpdateRequest
-    ): ApiResponse<Void> {
+    ): ApiResponse<Nothing> {
         matchingOptionHandler.saveOrUpdateMatchingOption(member.memberNumber, matchingOptionSaveOrUpdateRequest)
         return ApiResponse.Ok()
     }

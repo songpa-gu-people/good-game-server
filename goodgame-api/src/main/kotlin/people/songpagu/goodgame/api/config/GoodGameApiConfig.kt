@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
+import people.songpagu.goodgame.application.guild.incoming.GuildCreateUseCase
+import people.songpagu.goodgame.application.guild.outgoing.GuildCreatePort
+import people.songpagu.goodgame.application.guild.service.GuildCreateService
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionFindUseCase
 import people.songpagu.goodgame.application.matching.option.incoming.MatchingOptionSaveUseCase
 import people.songpagu.goodgame.application.matching.option.outgoing.MatchingOptionFindPort
@@ -58,5 +61,12 @@ class GoodGameApiConfig {
         memberPrivacyFindPort: MemberPrivacyFindPort
     ): MemberPrivacyFindUseCase {
         return MemberPrivacyFindService(memberPrivacyFindPort)
+    }
+
+    @Bean
+    fun guildCreateUseCase(
+        guildCreatePort: GuildCreatePort
+    ): GuildCreateUseCase {
+        return GuildCreateService(guildCreatePort)
     }
 }

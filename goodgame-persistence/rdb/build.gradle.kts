@@ -41,6 +41,8 @@ kotlin.sourceSets.main {
 dependencies {
     implementation(projects.goodgameDomain)
     implementation(projects.goodgameApplication)
+    implementation(projects.goodgameCommon)
+
     implementation(projects.infrastructure.log)
 
     implementation("${Dependencies.Database.FLYWAY}:${Versions.FLY_WAY}")
@@ -58,4 +60,6 @@ dependencies {
 
     testFixturesImplementation(projects.infrastructure.log)
     testFixturesImplementation(projects.goodgameDomain)
+    testFixturesImplementation(Dependencies.Kotest.PROPERTY)
+
 }

@@ -31,7 +31,7 @@ class ApiExceptionAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun methodArgumentNotValidException(e: MethodArgumentNotValidException): ApiResponse<Nothing> {
+    fun methodArgumentNotValidException(e: MethodArgumentNotValidException): ApiResponse<Void> {
         val message: String = e.bindingResult.fieldError!!.defaultMessage!!
         return ApiResponse.Fail(
             code = GoodGameCode.METHOD_ARGUMENT_NOT_VALID,

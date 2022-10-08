@@ -3,15 +3,13 @@ package people.songpagu.goodgame.jpa.domain.guild.entity
 import people.songpagu.goodgame.domain.guild.type.GuildMemberRole
 import javax.persistence.*
 
+@IdClass(GuildMemberEntityId::class)
 @Table(
     name = "guild_member"
 )
 @Entity
 class GuildMemberEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
     @Column(
         name = "member_number",
         nullable = false,
@@ -19,6 +17,7 @@ class GuildMemberEntity(
     )
     val memberNumber: String,
 
+    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "guild_id")
     val guildEntity: GuildEntity,
@@ -26,7 +25,7 @@ class GuildMemberEntity(
     _guildMemberRole: GuildMemberRole,
 ) {
     @Enumerated(EnumType.STRING)
-    @Column(name = "guild_member_position", columnDefinition = "VARCHAR(128) COMMENT '길드 멤버 등급'")
+    @Column(name = "guild_member_role", columnDefinition = "VARCHAR(128) COMMENT '길드 멤버 등급'")
     var guildMemberRole: GuildMemberRole = _guildMemberRole
         private set
 

@@ -1,6 +1,6 @@
 package people.songpagu.goodgame.jpa.domain.guild.entity
 
-import people.songpagu.goodgame.domain.guild.type.GuildMemberPosition
+import people.songpagu.goodgame.domain.guild.type.GuildMemberRole
 import javax.persistence.*
 
 @Table(
@@ -23,11 +23,11 @@ class GuildMemberEntity(
     @JoinColumn(name = "guild_id")
     val guildEntity: GuildEntity,
 
-    _guildMemberPosition: GuildMemberPosition,
+    _guildMemberRole: GuildMemberRole,
 ) {
     @Enumerated(EnumType.STRING)
     @Column(name = "guild_member_position", columnDefinition = "VARCHAR(128) COMMENT '길드 멤버 등급'")
-    var guildMemberPosition: GuildMemberPosition = _guildMemberPosition
+    var guildMemberRole: GuildMemberRole = _guildMemberRole
         private set
 
     companion object {
@@ -38,7 +38,7 @@ class GuildMemberEntity(
             return GuildMemberEntity(
                 memberNumber = memberNumber,
                 guildEntity = guildEntity,
-                _guildMemberPosition = GuildMemberPosition.MASTER,
+                _guildMemberRole = GuildMemberRole.MASTER,
             )
         }
     }

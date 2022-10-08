@@ -8,7 +8,7 @@ import people.songpagu.goodgame.api.config.common.response.ApiResponse
 import people.songpagu.goodgame.api.domain.guild.GuildControllerPath
 import people.songpagu.goodgame.api.domain.guild.dto.request.GuildCreateRequest
 import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
-import people.songpagu.goodgame.domain.guild.type.GuildMemberPosition
+import people.songpagu.goodgame.domain.guild.type.GuildMemberRole
 import people.songpagu.goodgame.jpa.domain.guild.entity.GUILD_NAME_MAX_LENGTH
 import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
 import people.songpagu.goodgame.jpa.lifecycle.common.CArbitraries
@@ -39,7 +39,7 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
 
         val guilds = guildJpaRepository.findAll()
         assertThat(guilds).hasSize(1)
-        assertThat(guilds[0].guildMembers[0].guildMemberPosition).isEqualTo(GuildMemberPosition.MASTER)
+        assertThat(guilds[0].guildMembers[0].guildMemberRole).isEqualTo(GuildMemberRole.MASTER)
         assertThat(guilds[0].guildMembers[0].memberNumber).isEqualTo(memberNumber)
 
         transactionManager.commit(transaction)

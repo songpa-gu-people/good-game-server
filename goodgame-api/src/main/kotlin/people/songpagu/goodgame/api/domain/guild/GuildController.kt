@@ -19,7 +19,7 @@ class GuildController(
     fun createGuild(
         @AuthenticationPrincipal member: UserDetailsImpl,
         @Validated @RequestBody guildCreateRequest: GuildCreateRequest,
-    ): ApiResponse<Nothing> {
+    ): ApiResponse<Void> {
         guildHandler.createGuild(member.memberNumber, guildCreateRequest)
         return ApiResponse.Ok()
     }

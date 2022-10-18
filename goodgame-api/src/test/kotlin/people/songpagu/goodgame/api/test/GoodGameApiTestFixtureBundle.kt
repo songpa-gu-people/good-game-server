@@ -15,7 +15,7 @@ import people.songpagu.goodgame.jpa.lifecycle.member.FixtureSavedMember
 abstract class GoodGameApiTestFixtureBundle : GoodGameApiRestAssured() {
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    protected lateinit var transactionManager: PlatformTransactionManager;
+    protected lateinit var transactionManager: PlatformTransactionManager
 
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired

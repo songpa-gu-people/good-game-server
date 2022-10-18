@@ -5,7 +5,7 @@ import people.songpagu.goodgame.api.domain.guild.adaptor.GuildAdaptor
 import people.songpagu.goodgame.api.domain.guild.dto.request.GuildCreateRequest
 
 @Handler
-class GuildHandler(
+class GuildCommandHandler(
     private val guildAdaptor: GuildAdaptor
 ) {
     fun createGuild(createMemberNumber: String, request: GuildCreateRequest) {

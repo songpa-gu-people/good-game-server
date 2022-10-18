@@ -1,8 +1,8 @@
 package people.songpagu.goodgame.jpa.domain.guild.facade
 
 import org.springframework.stereotype.Repository
-import people.songpagu.goodgame.application.guild.incoming.GuildCreateUseCase.GuildCreateCommand
-import people.songpagu.goodgame.application.guild.outgoing.GuildCreatePort
+import people.songpagu.goodgame.application.guild.create.incoming.GuildCreateUseCase.GuildCreateCommand
+import people.songpagu.goodgame.application.guild.create.outgoing.GuildCreatePort
 import people.songpagu.goodgame.jpa.domain.guild.entity.GuildEntity
 import people.songpagu.goodgame.jpa.domain.guild.repository.GuildJpaRepository
 

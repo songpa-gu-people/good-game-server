@@ -3,6 +3,7 @@ package people.songpagu.goodgame.api.domain.guild.dto.request
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import people.songpagu.goodgame.api.domain.guild.create.controller.request.GuildCreateRequest
 import people.songpagu.goodgame.api.test.DtoValidationTestContext
 import people.songpagu.goodgame.jpa.domain.guild.entity.GUILD_NAME_MAX_LENGTH
 import people.songpagu.goodgame.jpa.lifecycle.common.CArbitraries

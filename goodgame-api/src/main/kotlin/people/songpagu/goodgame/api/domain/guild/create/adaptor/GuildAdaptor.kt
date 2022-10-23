@@ -1,7 +1,7 @@
-package people.songpagu.goodgame.api.domain.guild.adaptor
+package people.songpagu.goodgame.api.domain.guild.create.adaptor
 
 import people.songpagu.goodgame.api.config.layer.Adapter
-import people.songpagu.goodgame.api.domain.guild.dto.request.GuildCreateRequest
+import people.songpagu.goodgame.api.domain.guild.create.controller.request.GuildCreateRequest
 import people.songpagu.goodgame.application.guild.create.incoming.GuildCreateUseCase
 
 @Adapter

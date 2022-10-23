@@ -8,12 +8,10 @@ import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
 import people.songpagu.goodgame.api.domain.guild.GuildControllerPath
-import people.songpagu.goodgame.api.domain.guild.dto.request.GuildCreateRequest
+import people.songpagu.goodgame.api.domain.guild.create.controller.request.GuildCreateRequest
 import people.songpagu.goodgame.api.domain.guild.query.adapter.dto.GuildFindAdapterAnswer
-import people.songpagu.goodgame.api.domain.guild.query.adapter.dto.GuildFindAdapterQuery
 import people.songpagu.goodgame.api.domain.guild.query.controller.request.GuildFindMoreRequest
 import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
-import people.songpagu.goodgame.application.guild.find.incoming.GuildFindMoreUseCase
 import people.songpagu.goodgame.domain.guild.type.GuildMemberRole
 import people.songpagu.goodgame.jpa.domain.guild.entity.GUILD_NAME_MAX_LENGTH
 import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity

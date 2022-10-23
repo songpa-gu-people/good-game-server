@@ -29,7 +29,7 @@ abstract class GoodGameApiRestAssured {
     protected fun <T> getApi(
         path: String,
         token: String? = "",
-        parameter: Map<String, String>? = mapOf(),
+        parameter: Map<String, Any?> = emptyMap(),
         responseType: TypeReference<ApiResponse.Ok<T>>
     ): ApiResponse.Ok<T> {
         val res: String = baseConfig(token, parameter)
@@ -51,7 +51,7 @@ abstract class GoodGameApiRestAssured {
         return jsonEntityMapper.readValue(res, responseType)
     }
 
-    private fun baseConfig(token: String?, params: Map<String, String>?): RequestSpecification {
+    private fun baseConfig(token: String?, params: Map<String, Any?> = emptyMap()): RequestSpecification {
         return RestAssured.given().log().all()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .accept(MediaType.APPLICATION_JSON_VALUE)

@@ -12,10 +12,11 @@ object FixtureSavedMember {
     fun kakaoMember(
         memberJpaRepository: MemberJpaRepository,
         memberPrivacyJpaRepository: MemberPrivacyJpaRepository,
-        gender: Gender
+        gender: Gender,
+        authId:String = "authId"
     ): MemberEntity {
         val memberNumber: String = UUID.randomUUID().toString().replace("-", "")
-        val memberEntity = MemberEntity.create(memberNumber, "authId", LoginType.KAKAO)
+        val memberEntity = MemberEntity.create(memberNumber, authId, LoginType.KAKAO)
         memberPrivacyJpaRepository.save(MemberPrivacyEntity.create(memberEntity, "email@email.co", gender))
         return memberJpaRepository.save(memberEntity)
     }

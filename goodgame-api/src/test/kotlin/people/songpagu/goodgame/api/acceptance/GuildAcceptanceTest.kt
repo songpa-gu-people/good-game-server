@@ -9,10 +9,9 @@ import org.junit.jupiter.api.TestFactory
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
 import people.songpagu.goodgame.api.domain.guild.GuildControllerPath
 import people.songpagu.goodgame.api.domain.guild.dto.request.GuildCreateRequest
-import people.songpagu.goodgame.api.domain.guild.dto.request.GuildFindPageRequest
-import people.songpagu.goodgame.api.domain.guild.dto.response.GuildFindPageResponse
+import people.songpagu.goodgame.api.domain.guild.query.controller.request.GuildFindMoreRequest
 import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
-import people.songpagu.goodgame.common.page.PageData
+import people.songpagu.goodgame.application.guild.find.incoming.GuildFindMoreUseCase
 import people.songpagu.goodgame.domain.guild.type.GuildMemberRole
 import people.songpagu.goodgame.jpa.domain.guild.entity.GUILD_NAME_MAX_LENGTH
 import people.songpagu.goodgame.jpa.domain.member.entity.MemberEntity
@@ -48,23 +47,17 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
             },
             dynamicTest("길드 조회") {
                 //given
-                val findRequest = GuildFindPageRequest(
-                    page = 1,
+                val findRequest = GuildFindMoreRequest(
+                    startId = null,
                     size = 20,
                 )
 
                 //when
-                val response: ApiResponse.Ok<PageData<GuildFindPageResponse>> = 길드_페이징_조회_요청(token = token, request = findRequest)
+                val response: ApiResponse.Ok<GuildFindMoreUseCase.GuildFindAnswer> = 길드_더보기_조회_요청(token = token, request = findRequest)
 
                 //then
                 assertThat(response.data!!.contents).hasSize(1)
                 assertThat(response.data!!.contents[0].guildName).isEqualTo(guildName)
-                assertThat(response.data!!.totalPages).isEqualTo(1)
-                assertThat(response.data!!.totalElements).isEqualTo(1)
-                assertThat(response.data!!.pageNumber).isEqualTo(1)
-                assertThat(response.data!!.isFirst).isTrue
-                assertThat(response.data!!.isLast).isTrue
-                assertThat(response.data!!.isEmpty).isFalse
             }
         )
     }
@@ -91,14 +84,17 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
         )
     }
 
-    private fun 길드_페이징_조회_요청(
-        token: String, request: GuildFindPageRequest
-    ): ApiResponse.Ok<PageData<GuildFindPageResponse>> {
-        return postApi(
+    private fun 길드_더보기_조회_요청(
+        token: String, request: GuildFindMoreRequest
+    ): ApiResponse.Ok<GuildFindMoreUseCase.GuildFindAnswer> {
+        return getApi(
             path = GuildControllerPath.Query.findGuilds,
             token = token,
-            body = request,
-            responseType = object : TypeReference<ApiResponse.Ok<PageData<GuildFindPageResponse>>>() {},
+            parameter = mapOf<String, Any?>(
+                "startId" to request.startId,
+                "szie" to request.size,
+            ),
+            responseType = object : TypeReference<ApiResponse.Ok<GuildFindMoreUseCase.GuildFindAnswer>>() {},
         )
     }
 }

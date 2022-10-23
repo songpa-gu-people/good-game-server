@@ -9,6 +9,8 @@ import org.junit.jupiter.api.TestFactory
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
 import people.songpagu.goodgame.api.domain.guild.GuildControllerPath
 import people.songpagu.goodgame.api.domain.guild.dto.request.GuildCreateRequest
+import people.songpagu.goodgame.api.domain.guild.query.adapter.dto.GuildFindAdapterAnswer
+import people.songpagu.goodgame.api.domain.guild.query.adapter.dto.GuildFindAdapterQuery
 import people.songpagu.goodgame.api.domain.guild.query.controller.request.GuildFindMoreRequest
 import people.songpagu.goodgame.api.test.GoodGameApiTestFixtureBundle
 import people.songpagu.goodgame.application.guild.find.incoming.GuildFindMoreUseCase
@@ -53,9 +55,21 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
                 )
 
                 //when
-                val response: ApiResponse.Ok<GuildFindMoreUseCase.GuildFindAnswer> = 길드_더보기_조회_요청(token = token, request = findRequest)
+                val response: ApiResponse.Ok<GuildFindAdapterAnswer> = 길드_더보기_조회_요청(token = token, request = findRequest)
 
                 //then
+                assertThat(response.data!!.contents).hasSize(1)
+                assertThat(response.data!!.contents[0].guildName).isEqualTo(guildName)
+            },
+            dynamicTest("길드 이름 조회") {
+                val findRequest = GuildFindMoreRequest(
+                    startId = null,
+                    size = 1,
+                    guildName = guildName,
+                )
+
+                val response: ApiResponse.Ok<GuildFindAdapterAnswer> = 길드_더보기_조회_요청(token = token, request = findRequest)
+
                 assertThat(response.data!!.contents).hasSize(1)
                 assertThat(response.data!!.contents[0].guildName).isEqualTo(guildName)
             }
@@ -86,15 +100,16 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
 
     private fun 길드_더보기_조회_요청(
         token: String, request: GuildFindMoreRequest
-    ): ApiResponse.Ok<GuildFindMoreUseCase.GuildFindAnswer> {
+    ): ApiResponse.Ok<GuildFindAdapterAnswer> {
         return getApi(
             path = GuildControllerPath.Query.findGuilds,
             token = token,
             parameter = mapOf<String, Any?>(
                 "startId" to request.startId,
-                "szie" to request.size,
+                "size" to request.size,
+                "guildName" to request.guildName,
             ),
-            responseType = object : TypeReference<ApiResponse.Ok<GuildFindMoreUseCase.GuildFindAnswer>>() {},
+            responseType = object : TypeReference<ApiResponse.Ok<GuildFindAdapterAnswer>>() {},
         )
     }
 }

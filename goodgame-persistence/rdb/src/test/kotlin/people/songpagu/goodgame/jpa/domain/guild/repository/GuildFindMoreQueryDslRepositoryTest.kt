@@ -7,12 +7,12 @@ import people.songpagu.goodgame.domain.guild.type.GuildMemberRole
 import people.songpagu.goodgame.domain.member.type.Gender
 import people.songpagu.goodgame.jpa.domain.guild.entity.GuildEntity
 import people.songpagu.goodgame.jpa.domain.guild.entity.GuildMemberEntity
-import people.songpagu.goodgame.jpa.domain.guild.repository.dto.GuildFindMoreRow
+import people.songpagu.goodgame.jpa.domain.guild.repository.dto.GuildFindRow
 import people.songpagu.goodgame.jpa.lifecycle.member.FixtureSavedMember
 import people.songpagu.goodgame.jpa.test.GoodGameRdbIntegrationTest
 
 class GuildFindMoreQueryDslRepositoryTest(
-    private val sut: GuildFindMoreQueryDslRepository,
+    private val sut: GuildFindQueryDslRepository,
 ) : GoodGameRdbIntegrationTest() {
 
     @DisplayName("조회 결과가 없는 경우")
@@ -23,7 +23,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         val size = 10L
 
         //when
-        val more: List<GuildFindMoreRow> = sut.findMoreBy(startId, size)
+        val more: List<GuildFindRow> = sut.findMoreBy(startId, size)
 
         //then
         assertThat(more).hasSize(0)
@@ -37,7 +37,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         guildJpaRepository.save(GuildEntity.create(member1.memberNumber, "GUILD_NAME"))
 
         //when
-        val more: List<GuildFindMoreRow> = sut.findMoreBy(null, 10)
+        val more: List<GuildFindRow> = sut.findMoreBy(null, 10)
 
         //then
         assertThat(more).hasSize(1)
@@ -51,7 +51,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         val guild1 = guildJpaRepository.save(GuildEntity.create(member1.memberNumber, "GUILD_NAME"))
 
         //when
-        val more: List<GuildFindMoreRow> = sut.findMoreBy(guild1.id, 10)
+        val more: List<GuildFindRow> = sut.findMoreBy(guild1.id, 10)
 
         //then
         assertThat(more).hasSize(0)

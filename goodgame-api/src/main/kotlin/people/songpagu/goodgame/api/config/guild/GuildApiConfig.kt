@@ -6,8 +6,11 @@ import people.songpagu.goodgame.application.guild.create.incoming.GuildCreateUse
 import people.songpagu.goodgame.application.guild.create.outgoing.GuildCreatePort
 import people.songpagu.goodgame.application.guild.create.service.GuildCreateService
 import people.songpagu.goodgame.application.guild.find.incoming.GuildFindMoreUseCase
+import people.songpagu.goodgame.application.guild.find.incoming.GuildNameFindUseCase
 import people.songpagu.goodgame.application.guild.find.outgoing.GuildFindMorePort
+import people.songpagu.goodgame.application.guild.find.outgoing.GuildNameFindPort
 import people.songpagu.goodgame.application.guild.find.service.GuildFindMoreService
+import people.songpagu.goodgame.application.guild.find.service.GuildNameFindService
 
 @Configuration
 class GuildApiConfig {
@@ -23,5 +26,12 @@ class GuildApiConfig {
         guildFindMorePort: GuildFindMorePort,
     ): GuildFindMoreUseCase {
         return GuildFindMoreService(guildFindMorePort)
+    }
+
+    @Bean
+    fun guildNameFindUseCase(
+        guildNameFindPort: GuildNameFindPort,
+    ): GuildNameFindUseCase {
+        return GuildNameFindService(guildNameFindPort)
     }
 }

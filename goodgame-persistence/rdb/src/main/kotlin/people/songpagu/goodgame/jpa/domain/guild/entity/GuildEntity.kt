@@ -11,6 +11,9 @@ const val GUILD_NAME_MAX_LENGTH: Int = 20
     uniqueConstraints = [
         UniqueConstraint(name = "uk_guild_1", columnNames = ["guild_number"]),
     ],
+    indexes = [
+        Index(name = "idx_guild_1", columnList = "guild_name")
+    ]
 )
 @Entity
 class GuildEntity(

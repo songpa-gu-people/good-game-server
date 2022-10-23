@@ -4,15 +4,19 @@ import org.springframework.stereotype.Repository
 import people.songpagu.goodgame.application.guild.create.incoming.GuildCreateUseCase.GuildCreateCommand
 import people.songpagu.goodgame.application.guild.create.outgoing.GuildCreatePort
 import people.songpagu.goodgame.application.guild.find.outgoing.GuildFindMorePort
+import people.songpagu.goodgame.application.guild.find.outgoing.GuildNameFindPort
+import people.songpagu.goodgame.application.guild.find.outgoing.dto.GuildFindQueryAnswer
 import people.songpagu.goodgame.jpa.domain.guild.entity.GuildEntity
-import people.songpagu.goodgame.jpa.domain.guild.repository.GuildFindMoreQueryDslRepository
+import people.songpagu.goodgame.jpa.domain.guild.repository.GuildFindQueryDslRepository
 import people.songpagu.goodgame.jpa.domain.guild.repository.GuildJpaRepository
 
 @Repository
 class GuildJpaFacade(
     private val guildJpaRepository: GuildJpaRepository,
-    private val guildFindMoreQueryDslRepository: GuildFindMoreQueryDslRepository,
-) : GuildCreatePort, GuildFindMorePort {
+    private val guildFindQueryDslRepository: GuildFindQueryDslRepository,
+) : GuildCreatePort,
+    GuildFindMorePort,
+    GuildNameFindPort {
     override fun create(guildCreateCommand: GuildCreateCommand) {
         val guildEntity: GuildEntity = GuildEntity.create(
             createMemberNumber = guildCreateCommand.createMemberNumber,
@@ -22,8 +26,13 @@ class GuildJpaFacade(
     }
 
     override fun findMoreBy(startId: Long?, size: Long): GuildFindMorePort.GuildFindMoreQueryAnswerCollection {
-        return guildFindMoreQueryDslRepository.findMoreBy(startId = startId, size = size)
-            .map { it.guildFindMoreQueryAnswer }
+        return guildFindQueryDslRepository.findMoreBy(startId = startId, size = size)
+            .map { it.guildFindQueryAnswer }
             .let { GuildFindMorePort.GuildFindMoreQueryAnswerCollection(it) }
+    }
+
+    override fun findByName(guildName: String, size: Long): List<GuildFindQueryAnswer> {
+        return guildFindQueryDslRepository.findByName(guildName, size)
+            .map { it.guildFindQueryAnswer }
     }
 }

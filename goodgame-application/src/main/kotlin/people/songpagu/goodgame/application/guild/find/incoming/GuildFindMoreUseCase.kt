@@ -1,7 +1,9 @@
 package people.songpagu.goodgame.application.guild.find.incoming
 
+import people.songpagu.goodgame.application.guild.find.incoming.dto.GuildFindContent
+
 interface GuildFindMoreUseCase {
-    fun findMoreBy(query: GuildFindMoreQuery): GuildFindAnswer
+    fun findMoreBy(startId: Long?, size: Long): GuildFindAnswer
 
     data class GuildFindMoreQuery(
         val startId: Long?,
@@ -9,14 +11,7 @@ interface GuildFindMoreUseCase {
     )
 
     data class GuildFindAnswer(
-        val contents: List<Content>,
+        val contents: List<GuildFindContent>,
         val lastId: Long?,
-    ) {
-        data class Content(
-            val guildId: Long,
-            val guildNumber: String,
-            val guildMemberSize: Long,
-            val guildName: String,
-        )
-    }
+    )
 }

@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import people.songpagu.goodgame.api.config.common.response.ApiResponse
 import people.songpagu.goodgame.api.domain.guild.GuildControllerPath
+import people.songpagu.goodgame.api.domain.guild.query.adapter.dto.GuildFindAdapterAnswer
 import people.songpagu.goodgame.api.domain.guild.query.controller.request.GuildFindMoreRequest
 import people.songpagu.goodgame.api.domain.guild.query.handler.GuildQueryHandler
-import people.songpagu.goodgame.application.guild.find.incoming.GuildFindMoreUseCase.GuildFindAnswer
 import people.songpagu.goodgame.security.domain.member.UserDetailsImpl
 
 @RestController
@@ -19,10 +19,11 @@ class GuildQueryController(
     fun findGuilds(
         @AuthenticationPrincipal member: UserDetailsImpl,
         @Validated request: GuildFindMoreRequest,
-    ): ApiResponse<GuildFindAnswer> {
-        val answer: GuildFindAnswer = guildQueryHandler.findMoreBy(
+    ): ApiResponse<GuildFindAdapterAnswer> {
+        val answer = guildQueryHandler.findBy(
             startId = request.startId,
-            size = request.size
+            size = request.size,
+            guildName = request.guildName,
         )
 
         return ApiResponse.Ok(answer)

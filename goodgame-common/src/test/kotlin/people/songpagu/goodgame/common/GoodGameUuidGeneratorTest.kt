@@ -1,11 +1,18 @@
 package people.songpagu.goodgame.common
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.matchers.string.shouldHaveLength
 
-class GoodGameUuidGeneratorTest {
-    @Test
-    internal fun uuid_생성_테스트() {
-        assertThat(GoodGameUuidGenerator.generate().length).isEqualTo(32)
+class GoodGameUuidGeneratorTest : BehaviorSpec({
+    given("goodgame 제공 UUID 생성기는") {
+        val sut = GoodGameUuidGenerator
+
+        `when`("UUID 생성시") {
+            val uuid = sut.generate()
+
+            then("32자리이다.") {
+                uuid shouldHaveLength 32
+            }
+        }
     }
-}
+})

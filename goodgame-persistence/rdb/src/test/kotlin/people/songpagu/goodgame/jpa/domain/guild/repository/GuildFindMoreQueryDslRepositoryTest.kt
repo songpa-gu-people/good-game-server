@@ -3,6 +3,7 @@ package people.songpagu.goodgame.jpa.domain.guild.repository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import people.songpagu.goodgame.application.guild.find.outgoing.GuildFindMorePort
 import people.songpagu.goodgame.domain.guild.type.GuildMemberRole
 import people.songpagu.goodgame.domain.member.type.Gender
 import people.songpagu.goodgame.jpa.domain.guild.entity.GuildEntity
@@ -11,9 +12,12 @@ import people.songpagu.goodgame.jpa.domain.guild.repository.dto.GuildFindRow
 import people.songpagu.goodgame.jpa.lifecycle.member.FixtureSavedMember
 import people.songpagu.goodgame.jpa.test.GoodGameRdbIntegrationTest
 
+@DisplayName("기본 길드 더보기 검색")
 class GuildFindMoreQueryDslRepositoryTest(
     private val sut: GuildFindQueryDslRepository,
 ) : GoodGameRdbIntegrationTest() {
+
+    private val emptyCondition = GuildFindMorePort.GuildFindQueryCondition(name = null)
 
     @DisplayName("조회 결과가 없는 경우")
     @Test
@@ -23,7 +27,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         val size = 10L
 
         //when
-        val more: List<GuildFindRow> = sut.findMoreBy(startId, size)
+        val more: List<GuildFindRow> = sut.findMoreBy(startId, size, emptyCondition)
 
         //then
         assertThat(more).hasSize(0)
@@ -37,7 +41,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         guildJpaRepository.save(GuildEntity.create(member1.memberNumber, "GUILD_NAME"))
 
         //when
-        val more: List<GuildFindRow> = sut.findMoreBy(null, 10)
+        val more: List<GuildFindRow> = sut.findMoreBy(null, 10, emptyCondition)
 
         //then
         assertThat(more).hasSize(1)
@@ -51,7 +55,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         val guild1 = guildJpaRepository.save(GuildEntity.create(member1.memberNumber, "GUILD_NAME"))
 
         //when
-        val more: List<GuildFindRow> = sut.findMoreBy(guild1.id, 10)
+        val more: List<GuildFindRow> = sut.findMoreBy(guild1.id, 10, emptyCondition)
 
         //then
         assertThat(more).hasSize(0)
@@ -78,7 +82,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         guildJpaRepository.save(GuildEntity.create(member2.memberNumber, "GUILD_NAME_2"))
 
         //when
-        val more = sut.findMoreBy(null, 10)
+        val more = sut.findMoreBy(null, 10, emptyCondition)
 
         //then
         assertThat(more).hasSize(2)
@@ -105,7 +109,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         val guild2 = guildJpaRepository.save(GuildEntity.create(member2.memberNumber, "GUILD_NAME_2"))
 
         //when
-        val more = sut.findMoreBy(guild2.id, 10)
+        val more = sut.findMoreBy(guild2.id, 10, emptyCondition)
 
         //then
         assertThat(more).hasSize(1)
@@ -140,7 +144,7 @@ class GuildFindMoreQueryDslRepositoryTest(
         guildMemberJpaRepository.save(GuildMemberEntity(member3.memberNumber, guild2, GuildMemberRole.MEMBER))
 
         //when
-        val more = sut.findMoreBy(null, 10)
+        val more = sut.findMoreBy(null, 10, emptyCondition)
 
         //then
         assertThat(more).hasSize(2)

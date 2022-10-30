@@ -10,7 +10,8 @@ class GuildQueryHandler(
     private val adapter: GuildFindAdapter,
 ) {
     fun findBy(startId: Long?, size: Long, guildName: String?): GuildFindAdapterAnswer {
-        val query = GuildFindAdapterQuery.of(startId, size, guildName)
+        val query = GuildFindAdapterQuery(startId = startId, size = size, name = guildName)
+
         return adapter.find(query)
     }
 }

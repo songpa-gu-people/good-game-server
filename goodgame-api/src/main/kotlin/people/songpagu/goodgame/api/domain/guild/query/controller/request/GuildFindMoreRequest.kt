@@ -6,8 +6,8 @@ import javax.validation.constraints.Min
 data class GuildFindMoreRequest(
     val startId: Long? = null,
 
-    @Min(value = 1)
-    @Max(value = 1000)
+    @field: Max(value = 1000)
+    @field: Min(value = 1)
     val size: Long = DEFAULT_PAGE_SIZE,
 
     val guildName: String? = null,

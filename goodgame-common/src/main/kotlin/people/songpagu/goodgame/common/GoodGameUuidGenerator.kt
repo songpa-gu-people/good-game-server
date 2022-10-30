@@ -1,6 +1,6 @@
 package people.songpagu.goodgame.common
 
-import java.util.*
+import java.util.UUID
 
 class GoodGameUuidGenerator {
     companion object {

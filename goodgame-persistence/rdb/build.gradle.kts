@@ -61,5 +61,4 @@ dependencies {
     testFixturesImplementation(projects.infrastructure.log)
     testFixturesImplementation(projects.goodgameDomain)
     testFixturesImplementation(Dependencies.Kotest.PROPERTY)
-
 }

@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.api.domain.guild.dto.request
+package people.songpagu.goodgame.api.domain.guild.create.controller.request
 
 import people.songpagu.goodgame.jpa.domain.guild.entity.GUILD_NAME_MAX_LENGTH
 import javax.validation.constraints.NotEmpty

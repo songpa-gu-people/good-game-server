@@ -6,7 +6,7 @@ import people.songpagu.goodgame.application.member.auth.login.outgoing.LoginMemb
 class LoginMemberNumberFindService(
     private val loginMemberNumberFindPort: LoginMemberNumberFindPort
 ) : LoginMemberNumberFindUseCase {
-    override fun findMemberNumberBy(refreshToken: String): String {
-        return loginMemberNumberFindPort.findMemberNumberBy(refreshToken)
+    override fun findMemberNumberBy(subjectOfToken: String): String {
+        return loginMemberNumberFindPort.findMemberNumberBy(subjectOfToken)
     }
 }

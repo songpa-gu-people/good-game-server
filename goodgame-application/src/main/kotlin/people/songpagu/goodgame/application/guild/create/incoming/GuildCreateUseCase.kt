@@ -1,4 +1,4 @@
-package people.songpagu.goodgame.application.guild.incoming
+package people.songpagu.goodgame.application.guild.create.incoming
 
 interface GuildCreateUseCase {
     fun createGuild(guildCreateCommand: GuildCreateCommand)

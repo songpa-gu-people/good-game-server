@@ -10,6 +10,7 @@ plugins {
 
 dependencies {
     implementation(projects.goodgameDomain)
+    implementation(projects.goodgameCommon)
     implementation(projects.goodgameSecurity)
     implementation(projects.goodgameApplication)
     implementation(projects.infrastructure.log)

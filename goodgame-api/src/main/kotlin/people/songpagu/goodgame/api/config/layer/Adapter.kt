@@ -1,5 +1,6 @@
 package people.songpagu.goodgame.api.config.layer
 
+import org.springframework.core.annotation.AliasFor
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -8,4 +9,7 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Service
 @Transactional
-annotation class Adapter
+annotation class Adapter(
+    @get:AliasFor(annotation = Transactional::class, attribute = "readOnly")
+    val readOnly: Boolean = false,
+)

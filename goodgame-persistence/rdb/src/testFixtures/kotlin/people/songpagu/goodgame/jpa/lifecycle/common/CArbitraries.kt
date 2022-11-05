@@ -29,7 +29,7 @@ class CArbitraries {
             return specialChars[0]
         }
 
-        fun <T> randomFrom(collections: MutableList<T?>): T? {
+        fun <T> randomFrom(collections: MutableList<T>): T {
             collections.shuffle()
             return collections[0]
         }

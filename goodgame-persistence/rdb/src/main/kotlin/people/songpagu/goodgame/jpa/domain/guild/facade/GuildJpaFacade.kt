@@ -1,9 +1,12 @@
 package people.songpagu.goodgame.jpa.domain.guild.facade
 
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Repository
 import people.songpagu.goodgame.application.guild.create.incoming.GuildCreateUseCase.GuildCreateCommand
 import people.songpagu.goodgame.application.guild.create.outgoing.GuildCreatePort
-import people.songpagu.goodgame.application.guild.find.outgoing.GuildFindMorePort
+import people.songpagu.goodgame.application.guild.find.outgoing.GuildListFindPort
+import people.songpagu.goodgame.application.guild.find.outgoing.GuildListFindPort.GuildFindMoreQueryAnswerCollection
+import people.songpagu.goodgame.application.guild.find.outgoing.GuildListFindPort.GuildFindQueryCondition
 import people.songpagu.goodgame.jpa.domain.guild.entity.GuildEntity
 import people.songpagu.goodgame.jpa.domain.guild.repository.GuildFindQueryDslRepository
 import people.songpagu.goodgame.jpa.domain.guild.repository.GuildJpaRepository
@@ -12,8 +15,7 @@ import people.songpagu.goodgame.jpa.domain.guild.repository.GuildJpaRepository
 class GuildJpaFacade(
     private val guildJpaRepository: GuildJpaRepository,
     private val guildFindQueryDslRepository: GuildFindQueryDslRepository,
-) : GuildCreatePort,
-    GuildFindMorePort {
+) : GuildCreatePort, GuildListFindPort {
     override fun create(guildCreateCommand: GuildCreateCommand) {
         val guildEntity: GuildEntity = GuildEntity.create(
             createMemberNumber = guildCreateCommand.createMemberNumber,
@@ -23,13 +25,13 @@ class GuildJpaFacade(
     }
 
     override fun findMoreBy(
-        startId: Long?,
-        size: Long,
-        condition: GuildFindMorePort.GuildFindQueryCondition
-    ): GuildFindMorePort.GuildFindMoreQueryAnswerCollection {
-        return guildFindQueryDslRepository.findMoreBy(startId = startId, size = size, condition)
+        condition: GuildFindQueryCondition,
+        pageNumber: Int,
+        pageSize: Int,
+    ): GuildFindMoreQueryAnswerCollection {
+        return guildFindQueryDslRepository.findAllBy(condition, PageRequest.of(pageNumber, pageSize))
             .map { it.guildFindQueryAnswer }
-            .let { GuildFindMorePort.GuildFindMoreQueryAnswerCollection(it) }
+            .let { GuildFindMoreQueryAnswerCollection(contents = it.content, totalPageSize = it.totalPages) }
     }
 
 }

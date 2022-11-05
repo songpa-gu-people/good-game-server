@@ -20,12 +20,7 @@ class GuildQueryController(
         @AuthenticationPrincipal member: UserDetailsImpl,
         @Validated request: GuildFindMoreRequest,
     ): ApiResponse<GuildFindAdapterAnswer> {
-        val answer = guildQueryHandler.findBy(
-            startId = request.startId,
-            size = request.size,
-            guildName = request.guildName,
-        )
-
+        val answer: GuildFindAdapterAnswer = guildQueryHandler.findBy(request)
         return ApiResponse.Ok(answer)
     }
 }

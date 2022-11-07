@@ -57,12 +57,11 @@ class GuildFindMoreQueryDslRepositoryTest(
         //when
         val more: Page<GuildFindRow> = sut.findAllBy(emptyCondition, PageRequest.of(0, 10))
 
-
         //then
         assertThat(more).hasSize(2)
     }
 
-    @DisplayName("2페이지 조회")
+    @DisplayName("페이지네이션 동작 확인 - 두번째 페이지 조회")
     @Test
     fun test3_1() {
         //given

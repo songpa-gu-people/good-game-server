@@ -4,15 +4,15 @@ import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 
 data class GuildFindMoreRequest(
-    val startId: Long? = null,
+    val pageNumber: Int = 0,
 
     @field: Max(value = 1000)
     @field: Min(value = 1)
-    val size: Long = DEFAULT_PAGE_SIZE,
+    val size: Int = DEFAULT_PAGE_SIZE,
 
     val guildName: String? = null,
 ) {
     companion object {
-        const val DEFAULT_PAGE_SIZE: Long = 20
+        const val DEFAULT_PAGE_SIZE: Int = 20
     }
 }

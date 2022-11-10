@@ -48,12 +48,11 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
             dynamicTest("길드 조회") {
                 //given
                 val findRequest = GuildFindMoreRequest(
-                    startId = null,
                     size = 20,
                 )
 
                 //when
-                val response: ApiResponse.Ok<GuildFindAdapterAnswer> = 길드_더보기_조회_요청(token = token, request = findRequest)
+                val response: ApiResponse.Ok<GuildFindAdapterAnswer> = 길드_리스트_조회_요청(token = token, request = findRequest)
 
                 //then
                 assertThat(response.data!!.contents).hasSize(1)
@@ -61,12 +60,11 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
             },
             dynamicTest("길드 이름 조회") {
                 val findRequest = GuildFindMoreRequest(
-                    startId = null,
                     size = 1,
                     guildName = guildName,
                 )
 
-                val response: ApiResponse.Ok<GuildFindAdapterAnswer> = 길드_더보기_조회_요청(token = token, request = findRequest)
+                val response: ApiResponse.Ok<GuildFindAdapterAnswer> = 길드_리스트_조회_요청(token = token, request = findRequest)
 
                 assertThat(response.data!!.contents).hasSize(1)
                 assertThat(response.data!!.contents[0].guildName).isEqualTo(guildName)
@@ -96,14 +94,14 @@ class GuildAcceptanceTest : GoodGameApiTestFixtureBundle() {
         )
     }
 
-    private fun 길드_더보기_조회_요청(
+    private fun 길드_리스트_조회_요청(
         token: String, request: GuildFindMoreRequest
     ): ApiResponse.Ok<GuildFindAdapterAnswer> {
         return getApi(
             path = GuildControllerPath.Query.findGuilds,
             token = token,
             parameter = mapOf<String, Any?>(
-                "startId" to request.startId,
+                "pageNumber" to request.pageNumber,
                 "size" to request.size,
                 "guildName" to request.guildName,
             ),
